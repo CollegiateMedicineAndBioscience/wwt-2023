@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+    client:
+        restart: unless-stopped
+        build:
+            context: ./client
+        ports:
+            - 3000:3000
+        volumes:
+            - ./client:/app
+            - client-node:/app/node_modules
+        networks:
+            - wwt-2023
+        environment:
+            WATCHPACK_POLLING: true
+            REACT_APP_API_ROOT: http://localhost:3001/api
+            BUILD_PATH: ../server/public/build
+        depends_on:
+            - server
+    server:
+        restart: unless-stopped
+        build:
+            context: ./server
+        ports:
+            - 3001:3001
+        volumes:
+            - ./server:/app
+            - server-node:/app/node_modules
+        networks:
+            - wwt-2023
+        environment:
+            NODE_ENV: development
+            CHOKIDAR_USEPOLLING: true
+            CLIENT_DOMAIN_ROOT: http://localhost:3000
+            PORT: 3001
+        depends_on:
+            - mysqldb
+    mysqldb:
+        restart: unless-stopped
+        image: mysql:5.7
+        ports:
+            - 3306:3306
+        volumes:
+            - wwt-2023-mysql:/var/lib/mysql
+        networks:
+            - wwt-2023
+        environment:
+            MYSQL_ROOT_PASSWORD: 'passw0rd'
+            MYSQL_DATABASE: dev
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            timeout: 5s
+            retries: 10
+
+volumes:
+    wwt-2023-mysql:
+    client-node:
+    server-node:
+networks:
+    wwt-2023: {}
