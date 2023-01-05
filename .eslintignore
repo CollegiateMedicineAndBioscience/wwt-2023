@@ -2,6 +2,9 @@
 *.yml
 *.sqlite3
 *.md
+*.css
+*.mdx
+*.log
 **/public
 LICENSE
 Dockerfile
