@@ -1,6 +1,6 @@
-# Collegiate Housewars
+# WWT 2023
 
-Welcome to the repository for the Collegiate School of Medicine and Bioscience BDPA 2023 project site. This is a project that is completely made using a NodeJS stack. This repository is open-source, so feel free to download, play around, and/or contribute. Below is a guide detailing the basic usage of the site and instructions for installation of a local development server. Enjoy!
+Welcome to the repository for the Collegiate School of Medicine and Bioscience WWT 2023 project site. This is a project that is completely made using a NodeJS stack. This repository is open-source, so feel free to download, play around, and/or contribute. Below is a guide detailing the basic usage of the site and instructions for installation of a local development server. Enjoy!
 
 | Table of Contents             |
 | ----------------------------- |
@@ -10,12 +10,7 @@ Welcome to the repository for the Collegiate School of Medicine and Bioscience B
 
 ## Setup
 
-Welcome to the installation section of the guide. This will walk you through installing the site and spinning up a local development server. There are two methods to settings up the development server. One uses docker and the other just boots up a local development server. I would highly recommend setting up docker for contributing, it is used by very many other projects and is a great tool for development.
-
--   [With Docker](#setup-with-docker)
--   [Without Docker](#setup-without-docker)
-
-### Setup with Docker:
+Welcome to the installation section of the guide. This will walk you through installing the site and spinning up a local development server. I would highly recommend setting up docker for contributing, it is used by very many other projects and is a great tool for development. It can be done without, but will require changing config code.
 
 #### Prerequisites:
 
@@ -27,8 +22,9 @@ Welcome to the installation section of the guide. This will walk you through ins
 1. Clone the repository into the desired directory using `git clone https://github.com/CollegiateMedicineAndBioscience/wwt-2023.git`.
 2. Navigate into the repository using `cd wwt-2023`.
 3. Open Docker and run the command `docker compose up -d` in a shell.
-4. In Docker, open the shell of the `app-1`.
-5. Server should be running automatically. The site will be accessible using the [default url](http://localhost:3000). The API will be available at it's [default url](http://localhost:3001) Any changes made in the filesystem will update live on the local server.
+4. In Docker, open the shell of the `server-1` and migrate your database using the command `npm run migrate development`.
+5. Migrate your
+6. Server should be running automatically. The site will be accessible using the [default url](http://localhost:3000). The API will be available at it's [default url](http://localhost:3001) Any changes made in the filesystem will update live on the local server.
 
 #### Relevant Commands:
 
@@ -36,26 +32,6 @@ Welcome to the installation section of the guide. This will walk you through ins
     -   `-d`: Removed terminal output from the command (disconnected mode). TLDR: docker doesn't steal your terminal
 -   `docker compose down`: This will stop the currently running containers and free up other ports for other apps (if you have them).
     -   `-v`: Removes volumes as well. Docker volumes can get very large and this will wipe all data contained in your database. WARNING: This will also delete any test data that you have added to the project.
-
-### Setup without Docker:
-
-#### Prerequisites:
-
--   `git` - You can test if you have git installed using the command `git -v`, which should output a version number. If you do not have git installed you can download it [here](https://git-scm.com/downloads).
--   `node` - You can test if you have node installed by typing `node -v` in the terminal. The resulting output should be a version number. If you do not have node installed, you can download it [here](https://nodejs.org/en/download/).
-
-#### Instructions:
-
-1. Clone the repository into the desired directory using `git clone https://github.com/CollegiateMedicineAndBioscience/wwt-2023.git`.
-2. Navigate into the repository using `cd wwt-2023`.
-3. Install all dependencies using `npm i`. This command may take several minutes.
-4. Run the local development server using `npm run start` and its variants, `start:server` and `start:client`.
-
-### Relevant Commands:
-
--   `npm run test`: Runs all tests for current features of the site. If something fails, your broke something, please fix it. If you think its not your fault, it probably is. However, if your REALLY (reevaluate life, please) think its not your fault, create an issue and we will try our best to resolve it as soon as possible. Your code will not commit if these tests do not pass.
--   `npm run migrate`: If you end up making any changes to the files in `housewars/models`, please run this command to log your changes. This will allow us to make the relevant changes to our production database and display the new features on the site.
--   `npm run eslint:all`: Will run all linting software to make sure that code uses standard formatting. Your code will not merge without this test passing.
 
 ## Hosting
 
