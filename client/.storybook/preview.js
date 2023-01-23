@@ -3,8 +3,11 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
+import '@storybook/addon-console';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
+import { cookieDecorator } from 'storybook-addon-cookie';
 
-import { lightTheme, darkTheme } from '../src/themes';
+import { darkTheme, lightTheme } from '../src/themes';
 
 export const parameters = {
     actions: { argTypesRegex: '^on[A-Z].*' },
@@ -59,8 +62,8 @@ export const globalTypes = {
             icon: 'paintbrush',
             dynamicTitle: true,
             items: [
-                { value: 'light', title: 'Light Mode' },
-                { value: 'dark', title: 'Dark Mode' },
+                { value: 'light', title: 'Light Mode', left: '🌞' },
+                { value: 'dark', title: 'Dark Mode', left: '🌙' },
             ],
         },
     },
@@ -92,4 +95,6 @@ export const withBrowserRouter = (Story) => {
     );
 };
 
-export const decorators = [withBrowserRouter, withMuiTheme];
+initialize();
+
+export const decorators = [mswDecorator, cookieDecorator, withBrowserRouter, withMuiTheme];
