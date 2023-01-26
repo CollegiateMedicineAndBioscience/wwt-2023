@@ -1,12 +1,12 @@
 const crypto = require('crypto');
 const argon2 = require('argon2');
 
-const { User } = require('../db/models/index');
+const { User } = require('../../db/models/index');
 const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
-async function Register(req, res, next) {
-    const body = req.body;
+async function Register(req, res) {
+    const { body } = req;
 
     // Verify that all of the required information is included in the request
     if (!body.email || !body.password) {

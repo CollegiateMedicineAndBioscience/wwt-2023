@@ -1,7 +1,7 @@
 const { Op } = require('sequelize');
 
 const { Token } = require('../db/models/index');
-const logger = require('../utils/logger');
+const logger = require('./logger');
 const config = require('../config/config.json');
 
 async function deleteExpiredTokens() {
