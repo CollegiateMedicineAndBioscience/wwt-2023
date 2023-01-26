@@ -34,6 +34,7 @@ services:
             CHOKIDAR_USEPOLLING: true
             CLIENT_DOMAIN_ROOT: http://localhost:3000
             PORT: 3001
+            SECRET_KEY: developmentSecretKey
         depends_on:
             - mysqldb
     mysqldb:

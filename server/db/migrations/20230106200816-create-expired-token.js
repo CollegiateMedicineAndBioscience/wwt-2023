@@ -1,12 +1,9 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('tokens', {
-            id: {
-                type: Sequelize.UUID,
+        await queryInterface.createTable('expired_tokens', {
+            token: {
+                type: Sequelize.STRING,
                 primaryKey: true,
-            },
-            expires: {
-                type: Sequelize.BOOLEAN,
             },
             createdAt: {
                 type: Sequelize.DATE,
@@ -18,6 +15,6 @@ module.exports = {
     },
 
     async down(queryInterface) {
-        await queryInterface.dropTable('tokens');
+        await queryInterface.dropTable('expired_tokens');
     },
 };

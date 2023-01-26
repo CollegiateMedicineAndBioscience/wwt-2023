@@ -10,6 +10,10 @@ module.exports = {
                 unique: true,
                 allowNull: false,
             },
+            salt: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
             password: {
                 type: Sequelize.STRING,
                 allowNull: false,

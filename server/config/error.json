@@ -16,5 +16,8 @@
     },
     "DuplicateName": {
         "error": "Something already exists with that name. Please try again with a different name."
+    },
+    "DuplicateUser": {
+        "error": "A user already exists with that email. Try logging in or resetting your password."
     }
 }
