@@ -5,11 +5,15 @@ const { User } = require('../../db/models/index');
 const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
-async function Register(req, res) {
+async function CreateUser(req, res) {
     const { body } = req;
 
+    const {
+        email, name, orgId, roomNumber, phoneNumber, password
+    } = body;
+
     // Verify that all of the required information is included in the request
-    if (!body.email || !body.password) {
+    if (!email || !name || !orgId || !roomNumber || !phoneNumber || !password) {
         return res.status(400).send(errors.Incomplete);
     }
 
@@ -41,4 +45,4 @@ async function Register(req, res) {
     }
 }
 
-module.exports = Register;
+module.exports = CreateUser;
