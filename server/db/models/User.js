@@ -11,6 +11,18 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'owner',
                 onDelete: 'CASCADE',
             });
+            User.belongsTo(models.Organization, {
+                foreignKey: 'orgId',
+                onDelete: 'SET NULL',
+            });
+            User.hasMany(models.Item, {
+                foreignKey: 'owner',
+                onDelete: 'CASCADE',
+            });
+            User.hasMany(models.Order, {
+                foreignKey: 'owner',
+                onDelete: 'CASCADE',
+            });
         }
     }
 
@@ -21,9 +33,21 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 defaultValue: DataTypes.UUIDV4,
             },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
             email: {
                 type: DataTypes.STRING,
                 unique: true,
+                allowNull: false,
+            },
+            phoneNumber: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            roomNumber: {
+                type: DataTypes.INTEGER,
                 allowNull: false,
             },
             salt: {
