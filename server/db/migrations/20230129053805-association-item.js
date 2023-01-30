@@ -1,6 +1,6 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.addColumn('expired_tokens', 'owner', {
+        await queryInterface.addColumn('items', 'owner', {
             type: Sequelize.UUID,
             references: {
                 model: 'users',
@@ -12,6 +12,6 @@ module.exports = {
     },
 
     async down(queryInterface) {
-        await queryInterface.removeColumn('expired_tokens', 'owner');
+        await queryInterface.removeColumn('items', 'owner');
     },
 };

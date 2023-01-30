@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     class Organization extends Model {
         static associate(models) {
             Organization.hasMany(models.User, {
+                foreignKey: 'organization',
                 onDelete: 'CASCADE',
             });
         }

@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
                 onDelete: 'CASCADE',
             });
             Item.belongsToMany(models.Order, {
-                as: 'orders',
-                through: 'item_orders',
+                foreignKey: 'item',
+                through: 'order_items',
             });
         }
     }
