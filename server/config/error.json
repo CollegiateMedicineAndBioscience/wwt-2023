@@ -19,5 +19,8 @@
     },
     "DuplicateUser": {
         "error": "A user already exists with that email. Try logging in or resetting your password."
+    },
+    "SessionExpired": {
+        "error": "Your session has expired, please log in again."
     }
 }
