@@ -45,13 +45,13 @@ async function tokenAuth(req, res, next) {
     const expiredToken = await ExpiredToken.findByPk(hash);
 
     if (expiredToken) {
-        return res.status(403).send(errors.Generic);
+        return res.status(403).send(errors.SessionExpired);
     }
 
     const result = await User.findByPk(decodedBody.uid);
 
     if (!result) {
-        return res.status(404).send(errors.SessionExpired);
+        return res.status(404).send(errors.NotFound);
     }
 
     req.user = result;

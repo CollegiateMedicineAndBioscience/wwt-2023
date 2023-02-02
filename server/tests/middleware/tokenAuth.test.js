@@ -112,7 +112,7 @@ describe('Token Authorization', () => {
 
         await tokenAuth(req, res, next);
 
-        expect(res.status).toBeCalledWith(440);
+        expect(res.status).toBeCalledWith(403);
         expect(res.send).toBeCalledWith(errors.SessionExpired);
     });
 
@@ -126,7 +126,7 @@ describe('Token Authorization', () => {
         const req = mockRequest({ headers: { authorization: `bearer ${testToken}` } });
         const res = mockResponse();
 
-        tokenAuth(req, res, next);
+        await tokenAuth(req, res, next);
 
         expect(res.status).toBeCalledWith(404);
         expect(res.send).toBeCalledWith(errors.NotFound);
