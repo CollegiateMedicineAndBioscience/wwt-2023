@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
                 onDelete: 'CASCADE',
             });
             User.belongsTo(models.Organization, {
+                foreignKey: 'organization',
                 onDelete: 'SET NULL',
             });
             User.hasMany(models.Item, {

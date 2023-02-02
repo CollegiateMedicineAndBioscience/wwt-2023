@@ -49,13 +49,14 @@ async function tokenAuth(req, res, next) {
     }
 
     const result = await User.findByPk(decodedBody.uid);
-    console.log(result);
 
     if (!result) {
         return res.status(404).send(errors.NotFound);
     }
 
     req.user = result;
+
+    return next();
 }
 
 module.exports = tokenAuth;

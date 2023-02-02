@@ -12,7 +12,7 @@ async function createTestUser(name, password) {
         name,
         email: `${name.replace(' ', '.').toLowerCase()}@test.com`,
         phoneNumber: '000-000-0000',
-        roomNumber: '000',
+        roomNumber: 0,
         salt,
         password: passwordHash,
     };
