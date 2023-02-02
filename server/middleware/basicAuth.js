@@ -1,5 +1,3 @@
-const forge = require('node');
-
 const { User } = require('../db/models/index');
 const errors = require('../config/error.json');
 
