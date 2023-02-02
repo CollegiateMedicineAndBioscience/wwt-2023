@@ -1,6 +1,6 @@
 const forge = require('node-forge');
 
-const { User, ExpiredToken } = require('../db/models/index');
+const { User, BlacklistedToken } = require('../db/models/index');
 
 const config = require('../config/config.json');
 const errors = require('../config/error.json');
@@ -42,21 +42,20 @@ async function tokenAuth(req, res, next) {
     }
 
     // Check if that token is included in a blacklist
-    const expiredToken = await ExpiredToken.findByPk(hash);
+    const blacklistedToken = await BlacklistedToken.findByPk(token);
 
-    if (expiredToken) {
+    if (blacklistedToken) {
         return res.status(403).send(errors.SessionExpired);
     }
 
     const result = await User.findByPk(decodedBody.uid);
+    console.log(result);
 
     if (!result) {
         return res.status(404).send(errors.NotFound);
     }
 
     req.user = result;
-
-    return next();
 }
 
 module.exports = tokenAuth;

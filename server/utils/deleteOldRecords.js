@@ -4,7 +4,7 @@ const { Token } = require('../db/models/index');
 const logger = require('./logger');
 const config = require('../config/config.json');
 
-async function deleteExpiredTokens() {
+async function clearTokenBlacklist() {
     logger.info('Deleting expired tokens from blacklist.');
 
     const date = new Date();
@@ -18,4 +18,4 @@ async function deleteExpiredTokens() {
     });
 }
 
-module.exports = { deleteExpiredTokens };
+module.exports = { clearTokenBlacklist };

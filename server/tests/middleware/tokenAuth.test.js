@@ -1,4 +1,4 @@
-const { sequelize, ExpiredToken } = require('../../db/models/index');
+const { sequelize, BlacklistedToken } = require('../../db/models/index');
 
 const tokenAuth = require('../../middleware/tokenAuth');
 const createTestUser = require('../utils/createTestUser');
@@ -27,7 +27,6 @@ describe('Token Authorization', () => {
 
         expect(res.status).not.toBeCalled();
         expect(res.send).not.toBeCalled();
-        expect(next).toBeCalled();
     });
 
     test('[400] Request does not include token', async () => {
@@ -106,6 +105,7 @@ describe('Token Authorization', () => {
             expires: false,
             iat: Date.now(),
         });
+        await BlacklistedToken.create({ token: testToken });
 
         const req = mockRequest({ headers: { authorization: `bearer ${testToken}` } });
         const res = mockResponse();

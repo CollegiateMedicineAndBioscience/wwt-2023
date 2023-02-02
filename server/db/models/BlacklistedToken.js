@@ -1,23 +1,23 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class ExpiredToken extends Model {
+    class BlacklistedToken extends Model {
         static associate(models) {
-            ExpiredToken.belongsTo(models.User, {
+            BlacklistedToken.belongsTo(models.User, {
                 onDelete: 'CASCADE',
             });
         }
     }
 
-    ExpiredToken.init(
+    BlacklistedToken.init(
         {
             token: {
                 type: DataTypes.STRING,
                 primaryKey: true,
             },
         },
-        { sequelize, tableName: 'tokens' }
+        { sequelize, tableName: 'blacklisted_tokens' }
     );
 
-    return ExpiredToken;
+    return BlacklistedToken;
 };
