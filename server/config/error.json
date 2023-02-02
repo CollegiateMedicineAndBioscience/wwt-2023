@@ -22,5 +22,8 @@
     },
     "SessionExpired": {
         "error": "Your session has expired, please log in again."
+    },
+    "BadToken": {
+        "error": "Something is wrong with your JWT. Please check it and try again."
     }
 }
