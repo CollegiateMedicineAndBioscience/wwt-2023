@@ -1,10 +1,11 @@
 const { sequelize, BlacklistedToken } = require('../../db/models/index');
 
 const tokenAuth = require('../../middleware/tokenAuth');
-const createTestUser = require('../utils/createTestUser');
-const createTestToken = require('../utils/createTestToken');
 const errors = require('../../config/error.json');
 const config = require('../../config/config.json');
+
+const createTestToken = require('../utils/createTestToken');
+const createTestUser = require('../utils/createTestUser');
 const { mockRequest, mockResponse } = require('../utils/mockRequests');
 
 describe('Token Authorization', () => {
@@ -23,7 +24,7 @@ describe('Token Authorization', () => {
         const req = mockRequest({ headers: { authorization: `bearer ${testToken}` } });
         const res = mockResponse();
 
-        tokenAuth(req, res, next);
+        await tokenAuth(req, res, next);
 
         expect(res.status).not.toBeCalled();
         expect(res.send).not.toBeCalled();
@@ -33,7 +34,7 @@ describe('Token Authorization', () => {
         const req = mockRequest({});
         const res = mockResponse();
 
-        tokenAuth(req, res, next);
+        await tokenAuth(req, res, next);
 
         expect(res.status).toBeCalledWith(400);
         expect(res.send).toBeCalledWith(errors.Incomplete);
@@ -43,7 +44,7 @@ describe('Token Authorization', () => {
         const req = mockRequest({ headers: { authorization: 'bearer randomString' } });
         const res = mockResponse();
 
-        tokenAuth(req, res, next);
+        await tokenAuth(req, res, next);
 
         expect(res.status).toBeCalledWith(400);
         expect(res.send).toBeCalledWith(errors.BadToken);
@@ -62,7 +63,7 @@ describe('Token Authorization', () => {
         const req = mockRequest({ headers: { authorization: `bearer ${testToken}` } });
         const res = mockResponse();
 
-        tokenAuth(req, res, next);
+        await tokenAuth(req, res, next);
 
         expect(res.status).toBeCalledWith(403);
         expect(res.send).toBeCalledWith(errors.Forbidden);
@@ -76,7 +77,7 @@ describe('Token Authorization', () => {
         const req = mockRequest({ headers: { authorization: `bearer ${testToken}` } });
         const res = mockResponse();
 
-        tokenAuth(req, res, next);
+        await tokenAuth(req, res, next);
 
         expect(res.status).toBeCalledWith(400);
         expect(res.send).toBeCalledWith(errors.BadToken);
@@ -93,7 +94,7 @@ describe('Token Authorization', () => {
         const req = mockRequest({ headers: { authorization: `bearer ${testToken}` } });
         const res = mockResponse();
 
-        tokenAuth(req, res, next);
+        await tokenAuth(req, res, next);
 
         expect(res.status).toBeCalledWith(440);
         expect(res.send).toBeCalledWith(errors.SessionExpired);

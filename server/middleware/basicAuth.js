@@ -1,11 +1,11 @@
 const { User } = require('../db/models/index');
 const errors = require('../config/error.json');
 
-async function basicAuth(req, res, next){
+async function basicAuth(req, res, next) {
     const authHeader = req.get('Authorization');
     const b64Encoded = authHeader?.split(' ')[1];
 
-    if(!b64Encoded) return res.status(400).send(errors.Incomplete);
+    if (!b64Encoded) return res.status(400).send(errors.Incomplete);
 
     // Isolate username and password
     const [email, password] = Buffer.from(b64Encoded, 'base64').toString().split(':');
@@ -13,7 +13,7 @@ async function basicAuth(req, res, next){
 
     // Make sure that a user exists with that email
     const result = await User.findOne({
-        where: { email: email },
+        where: { email },
     });
     if (!result) {
         return res.status(404).send(errors.NotFound);
