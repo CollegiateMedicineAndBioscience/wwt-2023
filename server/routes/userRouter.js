@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 // const basicAuth = require('../middleware/basicAuth');
-// const tokenAuth = require('../middleware/tokenAuth');
+const tokenAuth = require('../middleware/tokenAuth');
 
 const CreateUser = require('./user/CreateUser');
 const GetUser = require('./user/GetUser');
@@ -14,8 +14,8 @@ const DeleteUser = require('./user/DeleteUser');
 
 router.post('/', CreateUser);
 router.get('/', GetUser);
-router.patch('/', UpdateUser);
-router.delete('/', DeleteUser);
+router.patch('/', tokenAuth, UpdateUser);
+router.delete('/', tokenAuth, DeleteUser);
 // router.post('/login', basicAuth, Login);
 // router.post('/logout', tokenAuth, Logout);
 

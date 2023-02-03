@@ -24,7 +24,7 @@ async function UpdateUser(req, res) {
             return res.status(409).send(errors.DuplicateName);
         }
 
-        user.set({ email: user.email });
+        user.set({ email: body.email });
     }
 
     // Salt and hash the password if it was changed

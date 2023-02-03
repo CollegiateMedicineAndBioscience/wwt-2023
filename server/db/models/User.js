@@ -3,7 +3,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         static associate(models) {
-            User.hasMany(models.ExpiredToken, {
+            User.hasMany(models.BlacklistedToken, {
                 foreignKey: 'owner',
                 onDelete: 'CASCADE',
             });
@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
                 onDelete: 'CASCADE',
             });
             User.belongsTo(models.Organization, {
+                foreignKey: 'organization',
                 onDelete: 'SET NULL',
             });
             User.hasMany(models.Item, {
