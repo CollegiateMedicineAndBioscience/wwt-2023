@@ -6,7 +6,7 @@ const errors = require('../../config/error.json');
 
 const { mockRequest, mockResponse } = require('../utils/mockRequests');
 
-describe('Token Authorization', () => {
+describe('Password Authorization', () => {
     const next = jest.fn();
 
     beforeEach(async () => {
@@ -29,7 +29,7 @@ describe('Token Authorization', () => {
         expect(res.send).not.toBeCalled();
     });
 
-    test('[400] Request does not include token', async () => {
+    test('[400] Request does not include header', async () => {
         const req = mockRequest({});
         const res = mockResponse();
 
@@ -39,7 +39,7 @@ describe('Token Authorization', () => {
         expect(res.send).toBeCalledWith(errors.Incomplete);
     });
 
-    test('[400] Token does not include username and password', async () => {
+    test('[400] Header does not include username and password', async () => {
         const token = new Buffer.from('invalidToken').toString('base64');
 
         const req = mockRequest({ headers: { authorization: `basic ${token}` } });
