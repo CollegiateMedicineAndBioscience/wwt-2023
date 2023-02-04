@@ -21,6 +21,12 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 defaultValue: DataTypes.UUIDV4,
             },
+            status: {
+                type: DataTypes.ENUM({
+                    values: ['Pending', 'Available', 'Items Recieved', 'Completed'],
+                }),
+                defaultValue: 'Pending',
+            },
         },
         { sequelize, tableName: 'orders' }
     );

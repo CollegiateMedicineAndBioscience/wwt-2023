@@ -5,6 +5,12 @@ module.exports = {
                 type: Sequelize.UUID,
                 primaryKey: true,
             },
+            status: {
+                type: Sequelize.ENUM({
+                    values: ['Pending', 'Available', 'Items Recieved', 'Completed'],
+                }),
+                defaultValue: 'Pending',
+            },
         });
     },
 
