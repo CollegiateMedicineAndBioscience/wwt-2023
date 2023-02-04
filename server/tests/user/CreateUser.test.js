@@ -38,7 +38,7 @@ describe('Create User', () => {
             });
     });
 
-    test('[404] Organization not found with that ID', async () => {
+    test('[404] User not found with that ID', async () => {
         const user = {
             name: 'Test User',
             email: 'test.user@test.com',

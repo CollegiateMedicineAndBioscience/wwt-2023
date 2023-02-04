@@ -6,7 +6,7 @@ const app = require('../../app');
 const createTestUser = require('../utils/createTestUser');
 const createTestToken = require('../utils/createTestToken');
 
-describe('Get User', () => {
+describe('Delete User', () => {
     beforeEach(async () => {
         await sequelize.authenticate();
         await sequelize.sync({ force: 'true' });

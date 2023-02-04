@@ -22,7 +22,7 @@ async function UpdateOrganization(req, res) {
     }
 
     // Update the rest of the information
-    org.set({ body });
+    org.set(body);
 
     try {
         // Save the update model to the database

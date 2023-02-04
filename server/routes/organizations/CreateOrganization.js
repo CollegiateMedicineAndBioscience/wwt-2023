@@ -1,11 +1,8 @@
-const crypto = require('crypto');
-const argon2 = require('argon2');
-
 const { Organization } = require('../../db/models/index');
 const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
-async function CreateUser(req, res) {
+async function CreateOrganization(req, res) {
     const { body } = req;
 
     const { name, address } = body;
@@ -35,4 +32,4 @@ async function CreateUser(req, res) {
     }
 }
 
-module.exports = CreateUser;
+module.exports = CreateOrganization;
