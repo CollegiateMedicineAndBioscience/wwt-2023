@@ -12,7 +12,7 @@ async function clearTokenBlacklist() {
     await Token.destroy({
         where: {
             createdAt: {
-                [Op.gt]: date.setDate(date.getDate - config.JWT_TTL),
+                [Op.lt]: date.setDate(date.getDate - config.JWT_TTL),
             },
         },
     });
