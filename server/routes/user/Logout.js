@@ -1,20 +1,21 @@
-const { User } = require('../../db/models/index');
+const { BlacklistedToken } = require('../../db/models/index');
+const logger = require('../../utils/logger');
 const errors = require('../../config/error.json');
 
 async function Logout(req, res) {
-    const { id } = req.query;
+    const token = req.headers.authorization.split(' ')[1];
 
-    const result = await User.findByPk(id);
+    try {
+        // Add the token to the blacklist and send success
+        await BlacklistedToken.create({ token });
 
-    // Make sure that the result exists
-    if (!result) {
-        return res.status(404).send(errors.NotFound);
+        return res.sendStatus(200);
+    } catch (error) {
+        // Catch database write error if it occurs and log to file
+        logger.error(errors);
+
+        return res.status(500).send(errors.Generic);
     }
-
-    // Filter out things that shouldn't be sent to the frontend
-    const { salt, password, ...rest } = result.dataValues;
-
-    return res.send({ user: rest });
 }
 
 module.exports = Logout;

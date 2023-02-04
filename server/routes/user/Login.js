@@ -1,20 +1,26 @@
-const { User } = require('../../db/models/index');
-const errors = require('../../config/error.json');
+const forge = require('node-forge');
 
 async function Login(req, res) {
-    const { id } = req.query;
+    const { user } = req;
+    const { remember } = req.body;
 
-    const result = await User.findByPk(id);
+    // Create the header of the token with the default headers
+    const header = new Buffer.from(
+        JSON.stringify({
+            alg: 'SHA256',
+            type: 'JWT',
+        })
+    ).toString('base64');
 
-    // Make sure that the result exists
-    if (!result) {
-        return res.status(404).send(errors.NotFound);
-    }
+    // Create the body portion of the token
+    const body = new Buffer.from(
+        JSON.stringify({ uid: user.id, expires: remember, iat: Date.now() })
+    ).toString('base64');
 
-    // Filter out things that shouldn't be sent to the frontend
-    const { salt, password, ...rest } = result.dataValues;
+    // Combine the token with the secret key and has the result with SHA256
+    const hash = forge.md.sha256.create().update(`${header}.${body}.${process.env.SECRET_KEY}`);
 
-    return res.send({ user: rest });
+    return res.send({ token: `${header}.${body}.${hash.digest().toHex()}` });
 }
 
 module.exports = Login;
