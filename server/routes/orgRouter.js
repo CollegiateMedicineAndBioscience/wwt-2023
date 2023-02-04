@@ -2,16 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 
-const tokenAuth = require('../middleware/tokenAuth');
+const masterPassword = require('../middleware/masterPassword');
 
-// const CreateOrganization = require('./user/CreateUser');
-// const GetOrganization = require('./user/GetOrganization');
-// const UpdateOrganization = require('./user/UpdateOrganization');
-// const DeleteOrganization = require('./user/DeleteOrganization');
+const CreateOrganization = require('./organizations/CreateOrganization');
+const GetOrganization = require('./organizations/GetOrganization');
+const UpdateOrganization = require('./organizations/UpdateOrganization');
+const DeleteOrganization = require('./organizations/DeleteOrganization');
 
-router.post('/', CreateUser);
-router.get('/', GetUser);
-router.patch('/', tokenAuth, UpdateUser);
-router.delete('/', tokenAuth, DeleteUser);
+router.post('/', masterPassword, CreateOrganization);
+router.get('/', GetOrganization);
+router.patch('/', masterPassword, UpdateOrganization);
+router.delete('/', masterPassword, DeleteOrganization);
 
 module.exports = router;
