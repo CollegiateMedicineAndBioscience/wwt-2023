@@ -2,10 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 
-const CreateOrganization = require('./organizations/CreateOrganization');
-const GetOrganization = require('./organizations/GetOrganization');
-const UpdateOrganization = require('./organizations/UpdateOrganization');
-const DeleteOrganization = require('./organizations/DeleteOrganization');
+const CreateOrganization = require('./organization/CreateOrganization');
+const GetOrganization = require('./organization/GetOrganization');
+const UpdateOrganization = require('./organization/UpdateOrganization');
+const DeleteOrganization = require('./organization/DeleteOrganization');
 
 router.post('/', CreateOrganization);
 router.get('/', GetOrganization);

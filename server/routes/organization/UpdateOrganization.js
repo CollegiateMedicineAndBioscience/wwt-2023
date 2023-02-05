@@ -5,6 +5,11 @@ const logger = require('../../utils/logger');
 async function UpdateOrganization(req, res) {
     const { body } = req;
 
+    // Make sure that an id is included in the request
+    if (!body.id) {
+        return res.status(400).send(errors.Incomplete);
+    }
+
     const org = await Organization.findByPk(body.id);
 
     // Make sure that the result exists

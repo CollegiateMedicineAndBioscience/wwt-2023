@@ -1,10 +1,10 @@
 const supertest = require('supertest');
 
-const { sequelize, Organization } = require('../../db/models/index');
 const app = require('../../app');
+const { sequelize, Organization } = require('../../db/models/index');
+const errors = require('../../config/error.json');
 
 const createTestOrganization = require('../utils/createTestOrganization');
-const errors = require('../../config/error.json');
 
 describe('Create Organization', () => {
     beforeEach(async () => {
