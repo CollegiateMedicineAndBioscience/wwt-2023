@@ -1,17 +1,16 @@
 const crypto = require('crypto');
 const argon2 = require('argon2');
 
-const { Order } = require('../../db/models/index');
+const { Order, Item } = require('../../db/models/index');
 const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
 async function CreateOrder(req, res) {
-    const { body } = req;
-
-    const { email, name, orgId, roomNumber, phoneNumber, password } = body;
+    const { body } = req.body.token;
+    const { items } = req.body;
 
     // Verify that all of the required information is included in the request
-    if (!email || !name || !orgId || !roomNumber || !phoneNumber || !password) {
+    if (!items || items.length() === 0) {
         return res.status(400).send(errors.Incomplete);
     }
 
