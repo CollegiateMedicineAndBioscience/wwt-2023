@@ -16,7 +16,7 @@ describe('Create Organization', () => {
         const org = { name: 'Test Org', address: 'randomAddress' };
 
         await supertest(app)
-            .post('/api/org/')
+            .post('/api/org')
             .send(org)
             .expect('Content-Type', /text/)
             .expect(200, 'OK')
@@ -28,7 +28,7 @@ describe('Create Organization', () => {
 
     test('[400] Request missing fields', async () => {
         await supertest(app)
-            .post('/api/org/')
+            .post('/api/org')
             .send()
             .expect('Content-Type', /json/)
             .expect(400, errors.Incomplete);
@@ -38,7 +38,7 @@ describe('Create Organization', () => {
         await createTestOrganization('Test Org');
 
         await supertest(app)
-            .post('/api/org/')
+            .post('/api/org')
             .send({ name: 'Test Org', address: 'randomAddress' })
             .expect('Content-Type', /json/)
             .expect(409, errors.DuplicateName);

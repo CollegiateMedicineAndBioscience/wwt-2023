@@ -18,7 +18,7 @@ describe('Update User', () => {
         const testToken = createTestToken({ uid: testUser.id, expires: false, iat: Date.now() });
 
         await supertest(app)
-            .patch('/api/user/')
+            .patch('/api/user')
             .set('Authorization', `bearer ${testToken}`)
             .send({
                 email: 'new.email@test.com',
@@ -37,12 +37,23 @@ describe('Update User', () => {
         const testToken = createTestToken({ uid: testUser.id, expires: false, iat: Date.now() });
 
         await supertest(app)
-            .patch('/api/user/')
+            .patch('/api/user')
             .set('Authorization', `bearer ${testToken}`)
             .send({
                 email: otherUser.email,
             })
             .expect('Content-Type', /json/)
             .expect(409, errors.DuplicateName);
+    });
+
+    test('[404] Pre-existing user with email', async () => {
+        const testToken = createTestToken({ uid: 'randomId', expires: false, iat: Date.now() });
+
+        await supertest(app)
+            .patch('/api/user')
+            .set('Authorization', `bearer ${testToken}`)
+            .send()
+            .expect('Content-Type', /json/)
+            .expect(404, errors.NotFound);
     });
 });

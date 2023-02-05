@@ -28,7 +28,7 @@ describe('Create User', () => {
         };
 
         await supertest(app)
-            .post('/api/user/')
+            .post('/api/user')
             .send(user)
             .expect('Content-Type', /text/)
             .expect(200, 'OK')

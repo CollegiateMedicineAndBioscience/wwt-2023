@@ -7,7 +7,13 @@ const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
 async function UpdateUser(req, res) {
-    const { body, user } = req;
+    const { body, token } = req;
+
+    const user = await User.findByPk(token.body.uid);
+
+    if (!user) {
+        return res.status(404).send(errors.NotFound);
+    }
 
     // Make sure that there are no users with that email already in the database
     if (body.email) {
