@@ -4,7 +4,7 @@ const logger = require('../../utils/logger');
 
 async function DeleteOrder(req, res) {
     const { id } = req.query;
-    const { body } = req.token;
+    const { uid } = req.token.body;
 
     // Make sure that there is an orderId attached to the request
     if (!id) {
@@ -19,7 +19,7 @@ async function DeleteOrder(req, res) {
     }
 
     // Check if the owner is the same as the person requesting deletion
-    if (order.owner !== body.uid) {
+    if (order.owner !== uid) {
         return res.status(403).send(errors.Forbidden);
     }
 

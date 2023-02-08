@@ -16,7 +16,11 @@ describe('Delete Order', () => {
 
     test('[200] Order successfully deleted', async () => {
         const owner = await createTestUser('Test User', 'password');
-        const order = await createTestOrder({ owner: owner.id });
+        const order = await createTestOrder({
+            owner: owner.id,
+            startDate: Date.now(),
+            endDate: Date.now(),
+        });
         const token = createTestToken({ uid: owner.id, expires: true, iat: Date.now() });
 
         await supertest(app)
@@ -42,7 +46,11 @@ describe('Delete Order', () => {
 
     test('[403] Order is not owned by user', async () => {
         const owner = await createTestUser('Test User', 'password');
-        const order = await createTestOrder({ owner: owner.id });
+        const order = await createTestOrder({
+            owner: owner.id,
+            startDate: Date.now(),
+            endDate: Date.now(),
+        });
         const token = createTestToken({ uid: 'randomId', expires: true, iat: Date.now() });
 
         await supertest(app)

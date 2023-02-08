@@ -3,15 +3,27 @@ const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
 async function UpdateOrder(req, res) {
-    const { body } = req;
+    const { uid } = req.token.body;
+    const { id, status } = req.body;
 
-    const order = await Order.findByPk(body.id);
+    // Make sure that all required request components are present
+    if (!id || !status) {
+        return res.status(400).send(errors.Incomplete);
+    }
 
+    const order = await Order.findByPk(id);
+
+    // Make sure that the order exists
     if (!order) {
         return res.status(404).send(errors.NotFound);
     }
 
-    order.set({ status: body.status });
+    // Verify that the user owns that order
+    if (order.owner !== uid) {
+        return res.status(403).send(errors.Forbidden);
+    }
+
+    order.set({ status });
 
     try {
         // Save the update model to the database

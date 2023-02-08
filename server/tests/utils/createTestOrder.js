@@ -1,7 +1,7 @@
 const { Order } = require('../../db/models/index');
 
-async function createTestOrganization(body) {
+async function createTestOrder(body) {
     return Order.create(body);
 }
 
-module.exports = createTestOrganization;
+module.exports = createTestOrder;

@@ -25,5 +25,8 @@
     },
     "BadToken": {
         "error": "Something is wrong with your JWT. Please check it and try again."
+    },
+    "DateConflict": {
+        "error": "That item is already requested during that time. Please remove it and try again."
     }
 }
