@@ -1,6 +1,6 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.addColumn('user', 'organization', {
+        await queryInterface.addColumn('users', 'organization', {
             type: Sequelize.UUID,
             references: {
                 model: 'organizations',
