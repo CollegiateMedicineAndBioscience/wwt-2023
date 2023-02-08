@@ -1,6 +1,6 @@
 const forge = require('node-forge');
 
-const { User, BlacklistedToken } = require('../db/models/index');
+const { BlacklistedToken } = require('../db/models/index');
 
 const config = require('../config/config.json');
 const errors = require('../config/error.json');
