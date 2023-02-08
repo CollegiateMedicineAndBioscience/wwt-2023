@@ -6,6 +6,7 @@ const logger = require('morgan');
 const cors = require('cors');
 
 const userRouter = require('./routes/userRouter');
+const orgRouter = require('./routes/orgRouter');
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/user', userRouter);
+app.use('/api/org', orgRouter);
 
 app.use(express.static(path.join(__dirname, 'public/build')));
 app.get('*', (req, res) => {

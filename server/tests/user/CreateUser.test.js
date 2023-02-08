@@ -28,7 +28,7 @@ describe('Create User', () => {
         };
 
         await supertest(app)
-            .post('/api/user/')
+            .post('/api/user')
             .send(user)
             .expect('Content-Type', /text/)
             .expect(200, 'OK')
@@ -38,7 +38,7 @@ describe('Create User', () => {
             });
     });
 
-    test('[404] Organization not found with that ID', async () => {
+    test('[404] User not found with that ID', async () => {
         const user = {
             name: 'Test User',
             email: 'test.user@test.com',

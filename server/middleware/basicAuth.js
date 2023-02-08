@@ -4,10 +4,10 @@ const { User } = require('../db/models/index');
 const errors = require('../config/error.json');
 
 async function basicAuth(req, res, next) {
+
     const { headers } = req;
     if (!headers) return res.status(400).send(errors.Incomplete);
     const { authorization } = headers;
-
     const b64Encoded = authorization?.split(' ')[1];
     if (!b64Encoded) return res.status(400).send(errors.Incomplete);
 

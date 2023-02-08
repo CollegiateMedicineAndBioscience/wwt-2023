@@ -1,6 +1,6 @@
 const forge = require('node-forge');
 
-const { User, BlacklistedToken } = require('../db/models/index');
+const { BlacklistedToken } = require('../db/models/index');
 
 const config = require('../config/config.json');
 const errors = require('../config/error.json');
@@ -48,13 +48,10 @@ async function tokenAuth(req, res, next) {
         return res.status(403).send(errors.SessionExpired);
     }
 
-    const result = await User.findByPk(decodedBody.uid);
-
-    if (!result) {
-        return res.status(404).send(errors.NotFound);
-    }
-
-    req.user = result;
+    req.token = {
+        token,
+        body: decodedBody,
+    };
 
     return next();
 }
