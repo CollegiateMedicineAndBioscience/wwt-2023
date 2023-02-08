@@ -3,15 +3,12 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class User extends Model {
         static associate(models) {
-            User.hasMany(models.ExpiredToken, {
-                foreignKey: 'owner',
-                onDelete: 'CASCADE',
-            });
             User.hasOne(models.ResetRequest, {
                 foreignKey: 'owner',
                 onDelete: 'CASCADE',
             });
             User.belongsTo(models.Organization, {
+                foreignKey: 'organization',
                 onDelete: 'SET NULL',
             });
             User.hasMany(models.Item, {

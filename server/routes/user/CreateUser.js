@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const argon2 = require('argon2');
 
-const { User } = require('../../db/models/index');
+const { User, Organization } = require('../../db/models/index');
 const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
@@ -26,6 +26,13 @@ async function CreateUser(req, res) {
 
     if (existingUsers > 0) {
         return res.status(409).send(errors.DuplicateUser);
+    }
+
+    // Make sure that the organization exists
+    const organization = await Organization.findByPk(orgId);
+
+    if (!organization) {
+        return res.status(404).send(errors.NotFound);
     }
 
     // Salt and hash the password

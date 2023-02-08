@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     class Item extends Model {
         static associate(models) {
             Item.belongsTo(models.User, {
+                foreignKey: 'owner',
                 onDelete: 'CASCADE',
             });
             Item.belongsToMany(models.Order, {
