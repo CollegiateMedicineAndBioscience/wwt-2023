@@ -16,7 +16,11 @@ describe('Get Orders', () => {
     test('[200] Orders successfully retrieved', async () => {
         const user = await createTestUser('Test User', 'password');
         const token = createTestToken({ iat: Date.now(), uid: user.id, expires: false });
-        const order = await createTestOrder({ owner: user.id });
+        const order = await createTestOrder({
+            owner: user.id,
+            startDate: Date.now(),
+            endDate: Date.now(),
+        });
 
         await supertest(app)
             .get('/api/user/orders')

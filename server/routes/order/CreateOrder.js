@@ -59,8 +59,6 @@ async function CreateOrder(req, res) {
         },
     });
 
-    console.log(existingOrders);
-
     if (existingOrders > 0) {
         return res.status(409).send(errors.DateConflict);
     }
