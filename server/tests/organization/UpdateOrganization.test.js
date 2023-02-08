@@ -1,10 +1,10 @@
 const supertest = require('supertest');
 
-const { sequelize, Organization } = require('../../db/models/index');
 const app = require('../../app');
+const { sequelize, Organization } = require('../../db/models/index');
+const errors = require('../../config/error.json');
 
 const createTestOrganization = require('../utils/createTestOrganization');
-const errors = require('../../config/error.json');
 
 describe('Update Organization', () => {
     beforeEach(async () => {
@@ -27,6 +27,14 @@ describe('Update Organization', () => {
                 const data = await Organization.findByPk(org.id);
                 expect(data.name).toEqual('New Org');
             });
+    });
+
+    test('[400] Request missing fields', async () => {
+        await supertest(app)
+            .patch('/api/org')
+            .send()
+            .expect('Content-Type', /json/)
+            .expect(400, errors.Incomplete);
     });
 
     test('[409] Pre-existing organization with name', async () => {

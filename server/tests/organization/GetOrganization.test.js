@@ -1,10 +1,10 @@
 const supertest = require('supertest');
 
-const { sequelize } = require('../../db/models/index');
 const app = require('../../app');
+const { sequelize } = require('../../db/models/index');
+const errors = require('../../config/error.json');
 
 const createTestOrganization = require('../utils/createTestOrganization');
-const errors = require('../../config/error.json');
 
 describe('Get Organization', () => {
     beforeEach(async () => {
@@ -25,6 +25,14 @@ describe('Get Organization', () => {
                 expect(res.body.organization).toEqual(expect.objectContaining({ id: org.id }));
                 expect(res.body.organization).not.toEqual(expect.objectContaining(org));
             });
+    });
+
+    test('[400] Request missing fields', async () => {
+        await supertest(app)
+            .get('/api/org')
+            .send()
+            .expect('Content-Type', /json/)
+            .expect(400, errors.Incomplete);
     });
 
     test('[404] Organization not found', async () => {

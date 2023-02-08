@@ -16,10 +16,12 @@ module.exports = {
 
     async down(queryInterface) {
         return queryInterface.bulkDelete('Organization', {
-            [Op.or]: [
-                { name: 'Collegiate School of Medicine and Bioscience' },
-                { name: 'Central Visual and Performing Arts High School' },
-            ],
+            name: {
+                [Op.or]: [
+                    'Collegiate School of Medicine and Bioscience',
+                    'Central Visual and Performing Arts High School',
+                ],
+            },
         });
     },
 };

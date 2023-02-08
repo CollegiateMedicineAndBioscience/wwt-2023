@@ -5,6 +5,11 @@ const logger = require('../../utils/logger');
 async function DeleteOrganization(req, res) {
     const { id } = req.query;
 
+    // Make sure that an id is included in the request
+    if (!id) {
+        return res.status(400).send(errors.Incomplete);
+    }
+
     try {
         // Delete the user from the database
         await Organization.destroy({ where: { id } });
