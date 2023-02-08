@@ -19,14 +19,5 @@
     },
     "DuplicateUser": {
         "error": "A user already exists with that email. Try logging in or resetting your password."
-    },
-    "SessionExpired": {
-        "error": "Your session has expired, please log in again."
-    },
-    "BadToken": {
-        "error": "Something is wrong with your JWT. Please check it and try again."
-    },
-    "DateConflict": {
-        "error": "That item is already requested during that time. Please remove it and try again."
     }
 }

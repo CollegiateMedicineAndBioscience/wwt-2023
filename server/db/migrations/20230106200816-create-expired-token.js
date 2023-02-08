@@ -1,6 +1,6 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('blacklisted_tokens', {
+        await queryInterface.createTable('expired_tokens', {
             token: {
                 type: Sequelize.STRING,
                 primaryKey: true,
@@ -15,6 +15,6 @@ module.exports = {
     },
 
     async down(queryInterface) {
-        await queryInterface.dropTable('blacklisted_tokens');
+        await queryInterface.dropTable('expired_tokens');
     },
 };

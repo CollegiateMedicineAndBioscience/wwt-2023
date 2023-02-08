@@ -12,4 +12,4 @@ parserOptions:
 plugins:
     - react
     - jest
-rules: { 'indent': ['error', 4, { 'SwitchCase': 1 }], 'comma-dangle': 'off', 'new-cap': 'off' }
+rules: { 'indent': ['error', 4, { 'SwitchCase': 1 }], 'comma-dangle': 'off' }

@@ -1,13 +1,12 @@
-const { User } = require('../../db/models/index');
 const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
 async function DeleteUser(req, res) {
-    const { token } = req;
+    const { user } = req;
 
     try {
         // Delete the user from the database
-        await User.destroy({ where: { id: token.body.uid } });
+        await user.destroy();
 
         return res.sendStatus(200);
     } catch (e) {
