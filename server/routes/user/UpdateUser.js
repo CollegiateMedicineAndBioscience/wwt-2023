@@ -7,13 +7,7 @@ const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
 async function UpdateUser(req, res) {
-    const { body, token } = req;
-
-    const user = await User.findByPk(token.body.uid);
-
-    if (!user) {
-        return res.status(404).send(errors.NotFound);
-    }
+    const { body, user } = req;
 
     // Make sure that there are no users with that email already in the database
     if (body.email) {
@@ -30,7 +24,7 @@ async function UpdateUser(req, res) {
             return res.status(409).send(errors.DuplicateName);
         }
 
-        user.set({ email: body.email });
+        user.set({ email: user.email });
     }
 
     // Salt and hash the password if it was changed

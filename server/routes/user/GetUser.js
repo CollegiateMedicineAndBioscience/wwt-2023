@@ -1,18 +1,8 @@
-const { User } = require('../../db/models/index');
-const errors = require('../../config/error.json');
-
 async function GetUser(req, res) {
-    const { id } = req.query;
-
-    const result = await User.findByPk(id);
-
-    // Make sure that the result exists
-    if (!result) {
-        return res.status(404).send(errors.NotFound);
-    }
+    const { user } = req;
 
     // Filter out things that shouldn't be sent to the frontend
-    const { salt, password, ...rest } = result.dataValues;
+    const { salt, password, ...rest } = user;
 
     return res.send({ user: rest });
 }

@@ -41,19 +41,11 @@ There are several options that you can use for hosting the site on a production 
 
 ### Environment Variables
 
-The server environment variables are used to secure data and keep it from entering a cloud, open-acccess environment. Because of this, you will need to define a them in `./server/.env` yourself. These are only needed in production and are completely unnecessary if you are using a local development server. The varaibles that you will need are:
+The server environment variables are used to secure data and keep it from entering a cloud, open-acccess environment. Because of this, you will need to define a them file yourself. These are only needed in production and are completely unnecessary if you are using a local development server. The varaibles that you will need are:
 
--   NODE_ENV - The current environment of the app
--   CLIENT_DOMAIN_ROOT - The domain root of the client part of the application
--   PORT - The port that the server will run on
 -   DATABASE_USERNAME - This will be the username of your production database.
 -   DATABASE_PASSWORD - This will be the password of your production database.
 -   DATABASE_HOST - This will be the IP address of your production database.
-
-The client environment variables are used to designate build directories and provide configuration for the build client. In a production environment, you will tend not to need these, unless you are building the app. This should be contained in `./client/.env`. The variables that you will need are:
-
--   REACT_APP_API_ROOT - This should be the server API url.
--   BUILD_PATH - The path that the client should build into.
 
 ## Contributing
 

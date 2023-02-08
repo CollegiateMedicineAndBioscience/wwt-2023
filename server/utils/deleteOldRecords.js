@@ -4,7 +4,7 @@ const { Token } = require('../db/models/index');
 const logger = require('./logger');
 const config = require('../config/config.json');
 
-async function clearTokenBlacklist() {
+async function deleteExpiredTokens() {
     logger.info('Deleting expired tokens from blacklist.');
 
     const date = new Date();
@@ -12,10 +12,10 @@ async function clearTokenBlacklist() {
     await Token.destroy({
         where: {
             createdAt: {
-                [Op.lt]: date.setDate(date.getDate - config.JWT_TTL),
+                [Op.gt]: date.setDate(date.getDate - config.JWT_TTL),
             },
         },
     });
 }
 
-module.exports = { clearTokenBlacklist };
+module.exports = { deleteExpiredTokens };

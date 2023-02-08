@@ -9,7 +9,7 @@ const logger = require('../utils/logger');
 
 const { sequelize } = require('../db/models/index');
 
-const { clearTokenBlacklist } = require('../utils/deleteOldRecords');
+const { deleteExpiredTokens } = require('../utils/deleteOldRecords');
 
 function normalizePort(val) {
     const port = parseInt(val, 10);
@@ -91,7 +91,7 @@ connectDatabase().then(() => {
     /**
      * Listen on provided port, on all network interfaces.
      */
-    cron.schedule('*/5 * * * *', clearTokenBlacklist);
+    cron.schedule('*/5 * * * *', deleteExpiredTokens);
 
     server.listen(port);
     server.on('error', onError);
