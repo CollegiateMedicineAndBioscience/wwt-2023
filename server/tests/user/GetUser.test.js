@@ -12,7 +12,7 @@ describe('Get User', () => {
         await sequelize.sync({ force: 'true' });
     });
 
-    test('[200] User successfully created', async () => {
+    test('[200] User successfully retrieved', async () => {
         const testUser = await createTestUser('Test User', 'password');
 
         await supertest(app)

@@ -1,13 +1,13 @@
-const { User } = require('../../db/models/index');
+const { Organization } = require('../../db/models/index');
 const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
-async function DeleteUser(req, res) {
-    const { token } = req;
+async function DeleteOrganization(req, res) {
+    const { id } = req.query;
 
     try {
         // Delete the user from the database
-        await User.destroy({ where: { id: token.body.uid } });
+        await Organization.destroy({ where: { id } });
 
         return res.sendStatus(200);
     } catch (e) {
@@ -18,4 +18,4 @@ async function DeleteUser(req, res) {
     }
 }
 
-module.exports = DeleteUser;
+module.exports = DeleteOrganization;

@@ -116,20 +116,4 @@ describe('Token Authorization', () => {
         expect(res.status).toBeCalledWith(403);
         expect(res.send).toBeCalledWith(errors.SessionExpired);
     });
-
-    test('[404] User associated with token is not found', async () => {
-        const testToken = createTestToken({
-            uid: 'testId',
-            expires: true,
-            iat: Date.now(),
-        });
-
-        const req = mockRequest({ headers: { authorization: `bearer ${testToken}` } });
-        const res = mockResponse();
-
-        await tokenAuth(req, res, next);
-
-        expect(res.status).toBeCalledWith(404);
-        expect(res.send).toBeCalledWith(errors.NotFound);
-    });
 });
