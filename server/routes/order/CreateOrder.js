@@ -1,5 +1,4 @@
-const crypto = require('crypto');
-const argon2 = require('argon2');
+const { Op } = require('sequelize');
 
 const { Order, Item } = require('../../db/models/index');
 const errors = require('../../config/error.json');
@@ -7,38 +6,32 @@ const logger = require('../../utils/logger');
 
 async function CreateOrder(req, res) {
     const { body } = req.body.token;
-    const { items } = req.body;
+    const { ids } = req.body;
 
     // Verify that all of the required information is included in the request
-    if (!items || items.length() === 0) {
+    if (!ids || ids.length() === 0) {
         return res.status(400).send(errors.Incomplete);
     }
 
-    // Make sure that there are no users with that email already in the database
-    const existingUsers = await User.count({
+    // Make sure that all of the items exist
+    const itemCount = await Item.count({
         where: {
-            email: body.email,
+            id: {
+                [Op.or]: ids,
+            },
         },
     });
 
-    if (existingUsers > 0) {
-        return res.status(409).send(errors.DuplicateUser);
-    }
-
-    // Make sure that the organization exists
-    const organization = await Organization.findByPk(orgId);
-
-    if (!organization) {
+    if (itemCount !== ids.length) {
         return res.status(404).send(errors.NotFound);
     }
 
-    // Salt and hash the password
-    const salt = crypto.randomBytes(16);
-    const passwordHash = await argon2.hash(`${body.password}:${salt}`);
+    // Make sure that none of the items are already included in an order
+    const orderCount = await Order.count(0);
 
     try {
         // Write information to database and send success
-        await User.create({ ...body, salt, password: passwordHash });
+        await Order.create({ owner: body.uid, items: ids });
 
         return res.sendStatus(200);
     } catch (e) {
