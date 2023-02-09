@@ -4,15 +4,20 @@ const { User } = require('../db/models/index');
 const errors = require('../config/error.json');
 
 async function basicAuth(req, res, next) {
+    // Checking headers are present
     const { headers } = req;
     if (!headers) return res.status(400).send(errors.Incomplete);
     const { authorization } = headers;
+
+    // Taking from Base 64
     const b64Encoded = authorization?.split(' ')[1];
     if (!b64Encoded) return res.status(400).send(errors.Incomplete);
 
     // Isolate username and password
     const [email, password] = Buffer.from(b64Encoded, 'base64').toString().split(':');
-    if (!email || !password) return res.status(400).send(errors.Incomplete);
+    if (!email || !password) {
+        return res.status(400).send(errors.Incomplete);
+    }
 
     // Make sure that a user exists with that email
     const result = await User.findOne({
