@@ -1,8 +1,26 @@
 import { createTheme } from '@mui/material/styles';
 
-const darkTheme = createTheme({
+const dark = createTheme({
     palette: {
         mode: 'dark',
+        primary: {
+            main: '#5B8FB9',
+        },
+        dark: {
+            main: '#17223B',
+        },
+        highlight: {
+            main: '#6B778D',
+        },
+        transition: {
+            main: '#58647A',
+        },
+        midtone: {
+            main: '#263859',
+        },
+        main: {
+            main: '#17223B',
+        },
     },
     breakpoints: {
         values: {
@@ -13,4 +31,4 @@ const darkTheme = createTheme({
     },
 });
 
-export { darkTheme };
+export { dark };
