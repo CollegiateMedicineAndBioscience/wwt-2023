@@ -11,6 +11,9 @@ const StyledTextField = styled(TextField)`
     .MuiInputBase-root {
         background-color: ${({ theme, value }) => !value && theme.palette.form.field};
     }
+    .MuiInputBase-input {
+        background-color: ${({ theme, value }) => !value && theme.palette.form.field};
+    }
 `;
 
 const FormField = styled(StyledTextField)(({ theme }) => ({

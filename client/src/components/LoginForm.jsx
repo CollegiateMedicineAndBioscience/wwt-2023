@@ -15,43 +15,38 @@ import {
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
 import { FormLayout } from '.';
-import { FormField } from './StyledFormComponents';
 
 function Login({ form, handleSubmit, handleChange, handleCheckboxChange, error }) {
     return (
         <FormLayout text='Login' error={error}>
             <form onSubmit={handleSubmit} sx={{ color: 'text.primary' }}>
-                <FormControl variant='standard' fullWidth required>
-                    <FormField
+                <FormControl variant='standard' fullWidth required sx={{ margin: '1vh' }}>
+                    <TextField
+                        required
                         id='email'
-                        name='email'
                         size='small'
                         label='Type your email'
                         onChange={handleChange}
                         value={form.email}
-                        InputProps={{ inputProps: { style: { color: '#fff' } } }}
+                        sx={{
+                            input: {
+                                background: '#D9D9D9',
+                                color: 'red',
+                            },
+                        }}
                     />
                 </FormControl>
                 <FormControl variant='standard' fullWidth>
-                    <FormField
+                    <TextField
+                        required
                         id='password'
                         size='small'
                         label='Type your password'
                         onChange={handleChange}
                         value={form.password}
                         other={{ type: 'password' }}
-                        InputProps={{ inputProps: { style: { color: '#fff' } } }}
                     />
                 </FormControl>
-                <FormField
-                    required
-                    label='Password'
-                    name='password'
-                    onChange={handleChange}
-                    value={form.password}
-                    other={{ type: 'password' }}
-                    fullWidth
-                />
                 <div
                     style={{
                         display: 'flex',

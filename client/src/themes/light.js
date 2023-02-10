@@ -28,6 +28,7 @@ const lightTheme = createTheme({
         form: {
             field: '#D9D9D9',
             text: '#666666',
+            main: '#D9D9D9',
         },
     },
     breakpoints: {
