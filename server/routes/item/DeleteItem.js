@@ -7,6 +7,7 @@ async function DeleteItem(req, res) {
     const { uid } = req.token.body;
 
     if (!id) return res.status(400).send(errors.Incomplete);
+    console.log(id);
 }
 
 module.exports = DeleteItem;
