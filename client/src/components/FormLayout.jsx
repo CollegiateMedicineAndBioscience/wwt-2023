@@ -1,13 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box, Grid, Card, Typography, CardContent, Alert } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 import Logo from '../assets/logo.png';
 
 function FormLayout({ children, text, error }) {
-    const theme = useTheme();
-
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid
@@ -36,7 +33,7 @@ function FormLayout({ children, text, error }) {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item md={4} sx={{ color: theme.palette.main.main }}>
+                <Grid item md={4}>
                     <Card
                         sx={{
                             height: '75vh',

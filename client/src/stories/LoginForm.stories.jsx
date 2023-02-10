@@ -18,8 +18,8 @@ export const Primary = Template.bind({});
 Primary.parameters = {
     msw: {
         handlers: [
-            rest.post(`${process.env.REACT_APP_API_ROOT}/auth/login`, (req, res, ctx) => {
-                return res(ctx.status(200));
+            rest.post(`${process.env.REACT_APP_API_ROOT}/user/login`, (req, res, ctx) => {
+                return res(ctx.json({ token: 'testToken' }));
             }),
         ],
     },
