@@ -3,15 +3,21 @@ import { Outlet } from 'react-router-dom';
 import { Box, Grid, Card, Typography, CardContent, Alert } from '@mui/material';
 
 import Logo from '../assets/logo.png';
+import Background from '../assets/background.jpg';
 
-function FormLayout({ children, text, error }) {
+export default function FormLayout({ children, text, error, sx }) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid
                 container
                 spacing={0}
                 alignItems='center'
-                sx={{ height: '100vh', backgroundColor: 'midtone.main' }}
+                sx={{
+                    height: '100vh',
+                    backgroundImage: `url(${Background})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                }}
             >
                 <Grid item md={2} />
                 <Grid item md={4}>
@@ -43,13 +49,13 @@ function FormLayout({ children, text, error }) {
                             borderRadius: '0 1vh 1vh 0',
                         }}
                     >
-                        <CardContent>
+                        <CardContent sx={sx}>
                             {text && (
                                 <Typography
-                                    variant='h6'
+                                    variant={text.variant || 'h6'}
                                     sx={{ margin: '1vh 0vh', fontWeight: 'bold' }}
                                 >
-                                    {text}
+                                    {text.text}
                                 </Typography>
                             )}
                             {children}
@@ -63,5 +69,3 @@ function FormLayout({ children, text, error }) {
         </Box>
     );
 }
-
-export default FormLayout;

@@ -1,21 +1,60 @@
-import { TextField } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { withStyles } from '@mui/styles';
+import { FormControl, Typography, TextField, InputAdornment } from '@mui/material';
 
-const styles = {
-    root: {
-        background: '#D9D9D9',
-    },
-    input: {
-        color: '#666666',
-    },
-};
+import '../App.css';
 
-const FormField = styled(TextField)(({ theme }) => ({
-    [theme.breakpoints.only('xs')]: {
-        column: true,
-        width: '75%',
-    },
-}));
-
-export default withStyles(styles)(FormField);
+export default function FormField({ name, icon: Icon, handleChange, value, sx, ...props }) {
+    return (
+        <FormControl variant='standard' fullWidth required sx={sx}>
+            <Typography>{name}</Typography>
+            {Icon ? (
+                <TextField
+                    {...props}
+                    className='form-field'
+                    onChange={handleChange}
+                    value={value}
+                    sx={{
+                        input: {
+                            color: '#666666',
+                            padding: '1rem',
+                            borderRadius: '10',
+                        },
+                        '& .MuiOutlinedInput-root': {
+                            paddingLeft: 0,
+                        },
+                    }}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment
+                                sx={{
+                                    backgroundColor: (theme) => theme.palette.divider,
+                                    padding: '27.5px 14px',
+                                    margin: 0,
+                                }}
+                                position='start'
+                            >
+                                <Icon />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+            ) : (
+                <TextField
+                    {...props}
+                    className='form-field'
+                    onChange={handleChange}
+                    value={value}
+                    sx={{
+                        input: {
+                            color: '#666666',
+                            padding: '1rem',
+                            borderRadius: '10',
+                        },
+                        '& .MuiOutlinedInput-root': {
+                            paddingLeft: 0,
+                        },
+                    }}
+                />
+            )}
+        </FormControl>
+    );
+}

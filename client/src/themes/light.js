@@ -24,12 +24,9 @@ const lightTheme = createTheme({
         text: {
             primary: '#ffffff',
             main: '#ffffff',
+            form: '#D9D9D9',
         },
-        form: {
-            field: '#D9D9D9',
-            text: '#666666',
-            main: '#D9D9D9',
-        },
+        form: '#D9D9D9',
     },
     breakpoints: {
         values: {

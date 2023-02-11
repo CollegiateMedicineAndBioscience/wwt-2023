@@ -25,6 +25,14 @@ export const parameters = {
     layout: 'fullscreen',
     viewport: {
         viewports: {
+            desktop: {
+                name: 'Figma Frame',
+                styles: {
+                    width: '1280px',
+                    height: '832px',
+                },
+                type: 'desktop',
+            },
             laptop: {
                 name: 'Laptop',
                 styles: {
