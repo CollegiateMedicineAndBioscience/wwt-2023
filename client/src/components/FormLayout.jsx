@@ -19,12 +19,12 @@ export default function FormLayout({ children, text, error, sx }) {
                     backgroundSize: 'cover',
                 }}
             >
-                <Grid item md={2} />
-                <Grid item md={4}>
+                <Grid item md={1} />
+                <Grid item md={5}>
                     <Card
                         sx={{
-                            height: '75vh',
-                            margin: '12.5vh 0',
+                            height: '80vh',
+                            margin: '10vh 0',
                             padding: '2vh',
                             textAlign: 'center',
                             backgroundColor: '#3F0071',
@@ -35,21 +35,21 @@ export default function FormLayout({ children, text, error, sx }) {
                         }}
                     >
                         <CardContent>
-                            <img src={Logo} alt='cc-logo' width='80%' height='auto' />
+                            <img src={Logo} alt='cc-logo' width='75%' height='auto' />
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item md={4}>
+                <Grid item md={5}>
                     <Card
                         sx={{
-                            height: '75vh',
-                            margin: '12.5vh 0',
+                            height: '80vh',
+                            margin: '10vh 0',
                             padding: '2vh',
                             backgroundColor: 'main.main',
                             borderRadius: '0 1vh 1vh 0',
                         }}
                     >
-                        <CardContent sx={sx}>
+                        <CardContent sx={{ ...sx, overflow: 'auto' }}>
                             {text && (
                                 <Typography
                                     variant={text.variant || 'h6'}
@@ -64,7 +64,7 @@ export default function FormLayout({ children, text, error, sx }) {
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item md={2} />
+                <Grid item md={1} />
             </Grid>
         </Box>
     );

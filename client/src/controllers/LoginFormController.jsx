@@ -16,20 +16,11 @@ function LoginFormController() {
     });
 
     function handleChange(e) {
-        const name = e.target.id;
+        const name = e.target.name;
         const value = e.target.value;
 
         setForm((form) => {
             return { ...form, [name]: value };
-        });
-    }
-
-    function handleCheckboxChange(e) {
-        const name = e.target.name;
-        const checked = e.target.checked;
-
-        setForm(() => {
-            return { ...form, [name]: checked };
         });
     }
 
@@ -46,7 +37,7 @@ function LoginFormController() {
         }
     }
 
-    return <LoginForm {...{ form, handleSubmit, handleChange, handleCheckboxChange, error }} />;
+    return <LoginForm {...{ form, handleSubmit, handleChange, error }} />;
 }
 
 export default LoginFormController;

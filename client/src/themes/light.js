@@ -22,8 +22,8 @@ const lightTheme = createTheme({
             main: '#17223B',
         },
         text: {
-            primary: '#ffffff',
             main: '#ffffff',
+            primary: '#666666',
             form: '#D9D9D9',
         },
         form: '#D9D9D9',

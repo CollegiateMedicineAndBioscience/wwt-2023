@@ -4,9 +4,10 @@ const errors = require('../../config/error.json');
 async function GetOrganization(req, res) {
     const { id } = req.query;
 
-    // Make sure that an id is included in the request
     if (!id) {
-        return res.status(400).send(errors.Incomplete);
+        const orgs = await Organization.findAll({});
+
+        return res.send({ organizations: orgs });
     }
 
     const result = await Organization.findByPk(id);

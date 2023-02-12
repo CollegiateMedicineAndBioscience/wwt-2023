@@ -2,10 +2,19 @@ import { FormControl, Typography, TextField, InputAdornment } from '@mui/materia
 
 import '../App.css';
 
-export default function FormField({ name, icon: Icon, handleChange, value, sx, ...props }) {
+export default function FormField({
+    label,
+    icon: Icon,
+    handleChange,
+    value,
+    sx,
+    fullWidth,
+    children,
+    ...props
+}) {
     return (
-        <FormControl variant='standard' fullWidth required sx={sx}>
-            <Typography>{name}</Typography>
+        <FormControl variant='standard' fullWidth={fullWidth} required sx={sx}>
+            <Typography>{label}</Typography>
             {Icon ? (
                 <TextField
                     {...props}
@@ -15,8 +24,6 @@ export default function FormField({ name, icon: Icon, handleChange, value, sx, .
                     sx={{
                         input: {
                             color: '#666666',
-                            padding: '1rem',
-                            borderRadius: '10',
                         },
                         '& .MuiOutlinedInput-root': {
                             paddingLeft: 0,
@@ -26,9 +33,8 @@ export default function FormField({ name, icon: Icon, handleChange, value, sx, .
                         startAdornment: (
                             <InputAdornment
                                 sx={{
-                                    backgroundColor: (theme) => theme.palette.divider,
-                                    padding: '27.5px 14px',
                                     margin: 0,
+                                    padding: '0 8px',
                                 }}
                                 position='start'
                             >
@@ -36,7 +42,9 @@ export default function FormField({ name, icon: Icon, handleChange, value, sx, .
                             </InputAdornment>
                         ),
                     }}
-                />
+                >
+                    {children}
+                </TextField>
             ) : (
                 <TextField
                     {...props}
@@ -46,14 +54,14 @@ export default function FormField({ name, icon: Icon, handleChange, value, sx, .
                     sx={{
                         input: {
                             color: '#666666',
-                            padding: '1rem',
-                            borderRadius: '10',
                         },
                         '& .MuiOutlinedInput-root': {
                             paddingLeft: 0,
                         },
                     }}
-                />
+                >
+                    {children}
+                </TextField>
             )}
         </FormControl>
     );

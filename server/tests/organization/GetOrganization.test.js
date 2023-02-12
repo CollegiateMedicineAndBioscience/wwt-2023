@@ -27,14 +27,6 @@ describe('Get Organization', () => {
             });
     });
 
-    test('[400] Request missing fields', async () => {
-        await supertest(app)
-            .get('/api/org')
-            .send()
-            .expect('Content-Type', /json/)
-            .expect(400, errors.Incomplete);
-    });
-
     test('[404] Organization not found', async () => {
         await supertest(app)
             .get('/api/org')

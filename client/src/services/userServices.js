@@ -11,11 +11,7 @@ async function login({ email, password, remember }) {
 
     const { data } = await instance.post('/login', { remember });
 
-    if (remember) {
-        Cookies.set('token', data.token, { expires: 365 });
-    } else {
-        Cookies.set('token', data.token, { expires: 1 });
-    }
+    Cookies.set('token', data.token, { expires: 1 });
 
     return data;
 }

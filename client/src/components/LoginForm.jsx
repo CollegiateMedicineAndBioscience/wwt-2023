@@ -12,25 +12,37 @@ export default function Login({ form, handleSubmit, handleChange, error }) {
         <FormLayout
             text={{ variant: 'h4', text: 'Login' }}
             error={error}
-            sx={{ height: '100%', display: 'flex', flexDirection: 'column', padding: '10%' }}
+            sx={{
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                padding: '10%',
+                color: 'text.main',
+            }}
         >
-            <form onSubmit={handleSubmit} sx={{ color: 'text.primary' }}>
+            <form onSubmit={handleSubmit} sx={{ color: 'text.main' }}>
                 <FormField
-                    name='Email'
+                    name='email'
                     id='email'
+                    label='Email'
                     placeholder='Type your email'
                     icon={AccountCircle}
                     handleChange={handleChange}
                     value={form.email}
+                    fullWidth
+                    size='small'
                     sx={{ margin: '2vh 0' }}
                 />
                 <FormField
-                    name='Password'
+                    name='password'
                     id='password'
+                    label='Password'
                     placeholder='Type your password'
                     icon={LockIcon}
                     handleChange={handleChange}
                     value={form.password}
+                    fullWidth
+                    size='small'
                     sx={{ margin: '0.5vh 0' }}
                 />
                 <Box
@@ -56,7 +68,7 @@ export default function Login({ form, handleSubmit, handleChange, error }) {
                     Login
                 </Button>
             </form>
-            <Box sx={{ height: '50vh' }}></Box>
+            <Box sx={{ height: '50vh' }} />
             <Typography variant='body1' alignSelf='flex-end'>
                 Dont have an account?{' '}
                 <Link to='/register' style={{ color: '#D9D9D9' }}>

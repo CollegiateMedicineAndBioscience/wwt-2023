@@ -36,8 +36,8 @@ export const parameters = {
             laptop: {
                 name: 'Laptop',
                 styles: {
-                    width: '1024px',
-                    height: '576px',
+                    width: '1366px',
+                    height: '766px',
                 },
                 type: 'desktop',
             },
