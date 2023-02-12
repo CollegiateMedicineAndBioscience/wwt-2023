@@ -19,6 +19,15 @@ function NavbarLayoutController() {
     const { loggedIn, setLoggedIn } = useUser();
 
     const [open, setOpen] = useState(false);
+    const [menuAnchor, setMenuAnchor] = useState(null);
+
+    const openUserMenu = (event) => {
+        setMenuAnchor(() => event.target);
+    };
+
+    const closeUserMenu = () => {
+        setMenuAnchor(() => null);
+    };
 
     const toggleOpen = () => setOpen((initial) => !initial);
 
@@ -48,7 +57,16 @@ function NavbarLayoutController() {
             <main>
                 <Box sx={{ height: '100vh', backgroundColor: 'midtone.main' }}>
                     {md || sm
-                        ? Navbar({ logout: logoutUser, loggedIn })
+                        ? Navbar({
+                              logout: logoutUser,
+                              loggedIn,
+                              userMenu: {
+                                  anchor: menuAnchor,
+                                  handleOpen: openUserMenu,
+                                  handleClose: closeUserMenu,
+                              },
+                              anchor: menuAnchor,
+                          })
                         : MobileNavbar({
                               logout: logoutUser,
                               loggedIn,

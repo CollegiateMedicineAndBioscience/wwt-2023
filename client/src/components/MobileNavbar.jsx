@@ -53,7 +53,7 @@ export default function MobileNavbar({ loggedIn, logout, open, setOpen }) {
     }
 
     return (
-        <AppBar position='static' color='main'>
+        <AppBar position='static' color='main' sx={{ color: 'text.main' }}>
             <Toolbar>
                 <IconButton component={Link} to='/' sx={{ margin: '0 1vw 0 0 ' }}>
                     <img src={Logo} alt='bdpa logo' width='40' height='40' />
