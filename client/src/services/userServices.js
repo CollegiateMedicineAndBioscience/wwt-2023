@@ -9,11 +9,13 @@ async function login({ email, password, remember }) {
     const instance = createRequest('/user');
     instance.defaults.headers.common['Authorization'] = `basic ${encoded}`;
 
-    const { data } = await instance.post('/login', { remember });
+    const response = await instance.post('/login', { remember });
 
-    Cookies.set('token', data.token, { expires: 1 });
+    if (!response.success) {
+        return response;
+    }
 
-    return data;
+    Cookies.set('token', response.token, { expires: 1 });
 }
 
 async function register(data) {
@@ -33,7 +35,7 @@ async function updateUserDetails(data) {
     const instance = createRequest('/user');
     instance.defaults.headers.common['Authorization'] = `bearer ${Cookies.get('token')}`;
 
-    await instance.patch(`/`, data);
+    return instance.patch(`/`, data);
 }
 
 export { login, logout, register, updateUserDetails };

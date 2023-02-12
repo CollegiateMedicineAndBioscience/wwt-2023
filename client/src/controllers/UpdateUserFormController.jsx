@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { RegisterForm } from '../components';
+import { UpdateUserForm } from '../components';
 import { useError } from '../contexts';
-import { register } from '../services/userServices';
+import { updateUserDetails } from '../services/userServices';
 import { getAllOrgs } from '../services/orgServices';
 
-export default function RegisterFormController() {
+export default function UpdateUserFormController() {
     const navigate = useNavigate();
-    const [params] = useSearchParams();
     const { error, setError } = useError();
 
     const [form, setForm] = useState({
@@ -51,13 +50,14 @@ export default function RegisterFormController() {
 
         const { confirmPassword, ...filteredForm } = form;
 
-        const response = await register(filteredForm);
+        const response = await updateUserDetails(filteredForm);
+
         if (!response.success) {
             setError(response.error);
         } else {
-            navigate('/login');
+            navigate('/');
         }
     }
 
-    return <RegisterForm {...{ form, handleSubmit, handleChange, error, orgs }} />;
+    return <UpdateUserForm {...{ form, handleSubmit, handleChange, error, orgs }} />;
 }

@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../contexts';
 import { logout } from '../services/userServices';
 
-function NavbarLayoutController() {
+export default function NavbarLayoutController() {
     const navigate = useNavigate();
     const { loggedIn, setLoggedIn } = useUser();
 
@@ -35,16 +35,11 @@ function NavbarLayoutController() {
     const md = useMediaQuery((theme) => theme.breakpoints.only('md'));
 
     const logoutUser = async () => {
-        try {
-            await logout();
-        } catch (error) {
-            const message = error.response.data;
-
-            console.error(message.error);
-        }
+        await logout();
 
         Cookies.remove('token');
         setLoggedIn(() => false);
+
         navigate('/login');
     };
 
@@ -82,5 +77,3 @@ function NavbarLayoutController() {
         </ThemeProvider>
     );
 }
-
-export default NavbarLayoutController;

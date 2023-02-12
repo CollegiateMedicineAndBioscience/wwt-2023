@@ -5,7 +5,7 @@ import { LoginForm } from '../components';
 import { useError } from '../contexts';
 import { login } from '../services/userServices';
 
-function LoginFormController() {
+export default function LoginFormController() {
     const navigate = useNavigate();
     const { error, setError } = useError();
 
@@ -39,5 +39,3 @@ function LoginFormController() {
 
     return <LoginForm {...{ form, handleSubmit, handleChange, error }} />;
 }
-
-export default LoginFormController;

@@ -1,16 +1,16 @@
 import { rest } from 'msw';
 
-import { RegisterForm } from '../controllers';
+import { UpdateUserForm } from '../controllers';
 import { ErrorProvider } from '../contexts';
 
 export default {
-    title: 'Forms/Register',
-    component: RegisterForm,
+    title: 'Forms/Update User',
+    component: UpdateUserForm,
 };
 
 const Template = (args) => (
     <ErrorProvider>
-        <RegisterForm {...args} />
+        <UpdateUserForm {...args} />
     </ErrorProvider>
 );
 
@@ -38,7 +38,7 @@ Primary.parameters = {
                     })
                 );
             }),
-            rest.post(`${process.env.REACT_APP_API_ROOT}/user`, (req, res, ctx) => {
+            rest.patch(`${process.env.REACT_APP_API_ROOT}/user`, (req, res, ctx) => {
                 return res(ctx.status(200));
             }),
         ],
