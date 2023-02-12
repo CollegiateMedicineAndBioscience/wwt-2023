@@ -81,7 +81,7 @@ export default function Navbar({ loggedIn, logout, userMenu }) {
                     Login
                 </Button>
                 <Button color='inherit' component={Link} to='/register'>
-                    Register
+                    Sign Up
                 </Button>
             </>
         );
