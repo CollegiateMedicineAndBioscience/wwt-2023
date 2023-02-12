@@ -1,6 +1,6 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.addColumn('user', 'organization', {
+        await queryInterface.addColumn('users', 'organization', {
             type: Sequelize.UUID,
             references: {
                 model: 'organizations',
@@ -12,6 +12,6 @@ module.exports = {
     },
 
     async down(queryInterface) {
-        await queryInterface.removeColumn('user', 'organization');
+        await queryInterface.removeColumn('users', 'organization');
     },
 };
