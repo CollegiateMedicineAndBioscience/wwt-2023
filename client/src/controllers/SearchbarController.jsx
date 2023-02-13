@@ -14,11 +14,11 @@ export default function SearchbarController() {
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if (location.pathname === '/questions/search') {
+        if (location.pathname === '/search') {
             setSearchParams({ title: search }, { replace: true });
         } else {
             navigate({
-                pathname: '/questions/search',
+                pathname: '/search',
                 search: `?${createSearchParams({
                     title: search,
                 })}`,
