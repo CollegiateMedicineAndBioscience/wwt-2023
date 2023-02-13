@@ -1,34 +1,28 @@
-const { Op } = require('sequelize');
-
 const { Item } = require('../../db/models/index');
 const errors = require('../../config/error.json');
 const logger = require('../../utils/logger');
 
 async function CreateItem(req, res) {
     const { uid } = req.token.body;
-    const { names } = req.body;
-    // Make sure ids do exist
-    if (!names || names.length === 0) {
-        return res.status(404).send(errors.NotFound);
-    }
+    const { name, quantity } = req.body;
 
-    // Making sure input names is an array
-    if (!Array.isArray(names)) {
+    // Make sure fields exist and have content
+    if ((!name || name.length === 0) || (!quantity || quantity < 0)) {
         return res.status(400).send(errors.Incomplete);
     }
 
     // Getting items in req into format for bulkCreate
     const items = [];
     let item = { };
-
-    for (let i = 0; i < names.length; i += 1) {
+    for (let i = 0; i < quantity; i += 1) {
         item = {
             owner: uid,
-            name: names[i],
+            name,
         };
         items.push(item);
     }
 
+    // Making the actual bulk create
     try {
         await Item.bulkCreate(
             items,

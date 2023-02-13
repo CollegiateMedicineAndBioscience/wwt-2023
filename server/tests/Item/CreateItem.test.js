@@ -10,7 +10,7 @@ const errors = require('../../config/error.json');
 describe('Create Item', () => {
     let owner;
     let token;
-    const namesd = ['microscope', 'miniscope', 'big_scope', 'miniscope'];
+    const namesd = 'microscope';
 
     beforeEach(async () => {
         await sequelize.authenticate();
@@ -24,7 +24,7 @@ describe('Create Item', () => {
         await supertest(app)
             .post('/api/item')
             .set('Authorization', `bearer ${token}`)
-            .send({ names: namesd })
+            .send({ name: namesd, quantity: 5 })
             .expect('Content-Type', /text/)
             .expect(200, 'OK')
             .then(async () => {
@@ -35,21 +35,48 @@ describe('Create Item', () => {
             });
     });
 
-    test('[404] Item names not in array', async () => {
+    test('[400] Quantity is negative', async () => {
         await supertest(app)
             .post('/api/item')
             .set('Authorization', `bearer ${token}`)
-            .send({ names: 'hello' })
+            .send({ name: 'hello', quantity: -3 })
             .expect('Content-Type', /json/)
             .expect(400, errors.Incomplete);
     });
 
-    test('[400] Item names not included', async () => {
+    test('[400] Quantity is zero', async () => {
+        await supertest(app)
+            .post('/api/item')
+            .set('Authorization', `bearer ${token}`)
+            .send({ name: 'hello', quantity: 0 })
+            .expect('Content-Type', /json/)
+            .expect(400, errors.Incomplete);
+    });
+
+    test('[400] Quantity is wrongly typed', async () => {
+        await supertest(app)
+            .post('/api/item')
+            .set('Authorization', `bearer ${token}`)
+            .send({ name: 'hello', quantity: '-2' })
+            .expect('Content-Type', /json/)
+            .expect(400, errors.Incomplete);
+    });
+
+    test('[400] Name is wrongly typed', async () => {
+        await supertest(app)
+            .post('/api/item')
+            .set('Authorization', `bearer ${token}`)
+            .send({ name: 0, quantity: 0 })
+            .expect('Content-Type', /json/)
+            .expect(400, errors.Incomplete);
+    });
+
+    test('[400] Request missing fields', async () => {
         await supertest(app)
             .post('/api/item')
             .set('Authorization', `bearer ${token}`)
             .send()
             .expect('Content-Type', /json/)
-            .expect(404, errors.NotFound);
+            .expect(400, errors.Incomplete);
     });
 });
