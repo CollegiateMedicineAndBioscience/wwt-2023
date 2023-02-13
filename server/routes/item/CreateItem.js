@@ -9,20 +9,36 @@ async function CreateItem(req, res) {
     const { names } = req.body;
     // Make sure ids do exist
     if (!names || names.length === 0) {
-        return res(404).send(errors.NotFound);
+        return res.status(404).send(errors.NotFound);
     }
-    // Creating the items
-    try { // bad this needs to be checked
-        await Item.bulkCreate({
-            owner: uid,
-            name: names,
-        });
 
+    // Making sure input names is an array
+    if (!Array.isArray(names)) {
+        return res.status(400).send(errors.Incomplete);
+    }
+
+    // Getting items in req into format for bulkCreate
+    const items = [];
+    let item = { };
+
+    for (let i = 0; i < names.length; i += 1) {
+        item = {
+            owner: uid,
+            name: names[i],
+        };
+        items.push(item);
+    }
+
+    try {
+        await Item.bulkCreate(
+            items,
+        );
+        // Send 200 if sucsesfull
         return res.sendStatus(200);
     } catch (e) {
         logger.error(e);
-
-        return res(500).send(errors.Generic);
+        // Send 500 if something goes wrong
+        return res.status(500).send(errors.Generic);
     }
 }
 
