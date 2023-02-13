@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UpdateUserForm } from '../components';
-import { useError } from '../contexts';
-import { updateUserDetails } from '../services/userServices';
+import { useError, useUser } from '../contexts';
+import { getUser, updateUserDetails } from '../services/userServices';
 import { getAllOrgs } from '../services/orgServices';
 
 export default function UpdateUserFormController() {
     const navigate = useNavigate();
+    const { loggedIn } = useUser();
     const { error, setError } = useError();
 
     const [form, setForm] = useState({
@@ -24,12 +25,26 @@ export default function UpdateUserFormController() {
     const [orgs, setOrgs] = useState([]);
 
     useEffect(() => {
+        if (!loggedIn) {
+            navigate('/login');
+        }
+    });
+
+    useEffect(() => {
         async function getData() {
-            const response = await getAllOrgs();
-            if (!response.success) {
-                setError(response.error);
+            const orgsReq = await getAllOrgs();
+            if (!orgsReq.success) {
+                setError(orgsReq.error);
             } else {
-                setOrgs(response.organizations);
+                setOrgs(orgsReq.organizations);
+            }
+
+            const userReq = await getUser();
+            if (!userReq.success) {
+                setError(userReq.error);
+            } else {
+                console.log(userReq);
+                setForm((initial) => ({ ...initial, ...userReq.user }));
             }
         }
 
@@ -49,8 +64,11 @@ export default function UpdateUserFormController() {
         e.preventDefault();
 
         const { confirmPassword, ...filteredForm } = form;
+        const changes = Object.keys(filteredForm)
+            .filter((_, value) => value !== '')
+            .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
-        const response = await updateUserDetails(filteredForm);
+        const response = await updateUserDetails(changes);
 
         if (!response.success) {
             setError(response.error);

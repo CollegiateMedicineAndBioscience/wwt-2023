@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 import { UpdateUserForm } from '../controllers';
-import { ErrorProvider } from '../contexts';
+import { ErrorProvider, UserProvider } from '../contexts';
 
 export default {
     title: 'Forms/Update User',
@@ -10,7 +10,9 @@ export default {
 
 const Template = (args) => (
     <ErrorProvider>
-        <UpdateUserForm {...args} />
+        <UserProvider>
+            <UpdateUserForm {...args} />
+        </UserProvider>
     </ErrorProvider>
 );
 
@@ -38,9 +40,19 @@ Primary.parameters = {
                     })
                 );
             }),
+            rest.get(`${process.env.REACT_APP_API_ROOT}/user`, (req, res, ctx) => {
+                return res(
+                    ctx.json({
+                        user: { firstName: 'User', lastName: '' },
+                    })
+                );
+            }),
             rest.patch(`${process.env.REACT_APP_API_ROOT}/user`, (req, res, ctx) => {
                 return res(ctx.status(200));
             }),
         ],
+    },
+    cookie: {
+        token: 'headers.IntcbiAgdWlkOiAndGVzdFVJRCdcbn0i.hash',
     },
 };

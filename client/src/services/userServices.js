@@ -50,4 +50,18 @@ async function resetPassword(id, data) {
     return instance.patch(`/reset/${id}`, data);
 }
 
-export { login, logout, register, updateUserDetails, requestPasswordReset, resetPassword };
+async function getUser(id) {
+    const instance = createRequest('/user');
+
+    if (!id) {
+        const body = Cookies.get('token').split('.')[1];
+
+        const decodedBody = JSON.parse(new Buffer.from(body, 'base64'));
+
+        return instance.get(`/`, { params: { id: decodedBody.uid } });
+    }
+
+    return instance.get(`/`, { params: { id } });
+}
+
+export { login, logout, register, updateUserDetails, requestPasswordReset, resetPassword, getUser };
