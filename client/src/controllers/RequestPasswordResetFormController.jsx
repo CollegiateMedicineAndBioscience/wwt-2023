@@ -1,18 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LoginForm } from '../components';
+import { RequestPasswordResetForm } from '../components';
 import { useError } from '../contexts';
-import { login } from '../services/userServices';
+import { requestPasswordReset } from '../services/userServices';
 
-export default function LoginFormController() {
+export default function RequestPasswordResetFormController() {
     const navigate = useNavigate();
     const { error, setError } = useError();
 
     const [form, setForm] = useState({
         email: '',
-        password: '',
-        remember: false,
     });
 
     function handleChange(e) {
@@ -27,13 +25,13 @@ export default function LoginFormController() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const request = await login(form);
+        const request = await requestPasswordReset(form);
         if (!request.success) {
-            setError(() => request.error);
+            setError(request.error);
         } else {
             navigate('/');
         }
     }
 
-    return <LoginForm {...{ form, handleSubmit, handleChange, error }} />;
+    return <RequestPasswordResetForm {...{ form, handleSubmit, handleChange, error }} />;
 }

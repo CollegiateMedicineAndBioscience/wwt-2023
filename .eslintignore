@@ -6,6 +6,7 @@
 *.mdx
 *.log
 *.png
+*.jpg
 **/public
 LICENSE
 Dockerfile

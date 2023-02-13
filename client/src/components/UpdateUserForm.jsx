@@ -130,6 +130,7 @@ export default function UpdateUserForm({ form, handleSubmit, handleChange, error
                     variant='contained'
                     fullWidth
                     sx={{ margin: '2vh 0' }}
+                    disabled={form.password !== form.confirmPassword}
                 >
                     Save Changes
                 </Button>

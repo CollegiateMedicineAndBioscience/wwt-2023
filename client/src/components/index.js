@@ -6,6 +6,8 @@ import FormLayout from './FormLayout';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import UpdateUserForm from './UpdateUserForm';
+import RequestPasswordResetForm from './RequestPasswordResetForm';
+import ResetPasswordForm from './ResetPasswordForm';
 
 export {
     FormField,
@@ -16,4 +18,6 @@ export {
     RegisterForm,
     Searchbar,
     UpdateUserForm,
+    RequestPasswordResetForm,
+    ResetPasswordForm,
 };

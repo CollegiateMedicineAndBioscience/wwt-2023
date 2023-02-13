@@ -38,4 +38,16 @@ async function updateUserDetails(data) {
     return instance.patch(`/`, data);
 }
 
-export { login, logout, register, updateUserDetails };
+async function requestPasswordReset(data) {
+    const instance = createRequest('/user');
+
+    return instance.post(`/reset`, data);
+}
+
+async function resetPassword(id, data) {
+    const instance = createRequest('/user');
+
+    return instance.patch(`/reset/${id}`, data);
+}
+
+export { login, logout, register, updateUserDetails, requestPasswordReset, resetPassword };

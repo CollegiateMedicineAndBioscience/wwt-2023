@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { RegisterForm } from '../components';
 import { useError } from '../contexts';
@@ -8,7 +8,6 @@ import { getAllOrgs } from '../services/orgServices';
 
 export default function RegisterFormController() {
     const navigate = useNavigate();
-    const [params] = useSearchParams();
     const { error, setError } = useError();
 
     const [form, setForm] = useState({

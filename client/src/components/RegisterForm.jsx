@@ -131,6 +131,7 @@ export default function Register({ form, handleSubmit, handleChange, error, orgs
                     variant='contained'
                     fullWidth
                     sx={{ margin: '2vh 0' }}
+                    disabled={form.password !== form.confirmPassword}
                 >
                     Sign Up
                 </Button>
