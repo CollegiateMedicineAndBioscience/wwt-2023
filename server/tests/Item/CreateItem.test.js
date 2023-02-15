@@ -28,10 +28,8 @@ describe('Create Item', () => {
             .expect('Content-Type', /text/)
             .expect(200, 'OK')
             .then(async () => {
-                const data = await Item.findOne({ where: { owner: owner.id } });
-                expect(data).not.toBeNull();
-                const dataCount = await Item.count({ where: { owner: owner.id } });
-                expect(dataCount === namesd.length);
+                const data = await Item.findAll({ where: { owner: owner.id } });
+                expect(data.length).toEqual(5);
             });
     });
 
