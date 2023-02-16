@@ -8,6 +8,7 @@ import RegisterForm from './RegisterForm';
 import UpdateUserForm from './UpdateUserForm';
 import RequestPasswordResetForm from './RequestPasswordResetForm';
 import ResetPasswordForm from './ResetPasswordForm';
+import SearchPage from './SearchPage';
 
 export {
     FormField,
@@ -20,4 +21,5 @@ export {
     UpdateUserForm,
     RequestPasswordResetForm,
     ResetPasswordForm,
+    SearchPage,
 };

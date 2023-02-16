@@ -5,6 +5,7 @@ import UpdateUserForm from './UpdateUserFormController';
 import Searchbar from './SearchbarController';
 import RequestPasswordResetForm from './RequestPasswordResetFormController';
 import ResetPasswordForm from './ResetPasswordFormController';
+import SearchPage from './SearchPageController';
 
 export {
     NavbarLayout,
@@ -14,4 +15,5 @@ export {
     UpdateUserForm,
     RequestPasswordResetForm,
     ResetPasswordForm,
+    SearchPage,
 };

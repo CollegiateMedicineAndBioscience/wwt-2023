@@ -1,16 +1,18 @@
 import { rest } from 'msw';
 
-import { RegisterForm } from '../controllers';
-import { ErrorProvider } from '../contexts';
+import { SearchPage } from '../controllers';
+import { ErrorProvider, UserProvider } from '../contexts';
 
 export default {
-    title: 'Pages/Register',
-    component: RegisterForm,
+    title: 'Pages/Search',
+    component: SearchPage,
 };
 
 const Template = (args) => (
     <ErrorProvider>
-        <RegisterForm {...args} />
+        <UserProvider>
+            <SearchPage {...args} />
+        </UserProvider>
     </ErrorProvider>
 );
 
@@ -37,9 +39,6 @@ Primary.parameters = {
                         ],
                     })
                 );
-            }),
-            rest.post(`${process.env.REACT_APP_API_ROOT}/user`, (req, res, ctx) => {
-                return res(ctx.status(200));
             }),
         ],
     },

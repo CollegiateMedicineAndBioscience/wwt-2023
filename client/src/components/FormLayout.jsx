@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Box, Grid, Card, Typography, CardContent, Alert } from '@mui/material';
 

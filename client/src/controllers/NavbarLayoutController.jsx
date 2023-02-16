@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../contexts';
 import { logout } from '../services/userServices';
 
-export default function NavbarLayoutController() {
+export default function NavbarLayoutController({ children }) {
     const navigate = useNavigate();
     const { loggedIn, setLoggedIn } = useUser();
 
@@ -71,6 +71,7 @@ export default function NavbarLayoutController() {
 
                     <Box>
                         <Outlet />
+                        {children}
                     </Box>
                 </Box>
             </main>

@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { RequestPasswordResetForm } from '../controllers';
 import { ErrorProvider } from '../contexts';
 export default {
-    title: 'Forms/Request Password Reset',
+    title: 'Pages/Request Password Reset',
     component: RequestPasswordResetForm,
 };
 

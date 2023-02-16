@@ -4,7 +4,7 @@ import { LoginForm } from '../controllers';
 import { ErrorProvider } from '../contexts';
 
 export default {
-    title: 'Forms/Login',
+    title: 'Pages/Login',
     component: LoginForm,
 };
 

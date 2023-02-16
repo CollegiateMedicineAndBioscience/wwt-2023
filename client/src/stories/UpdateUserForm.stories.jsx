@@ -4,7 +4,7 @@ import { UpdateUserForm } from '../controllers';
 import { ErrorProvider, UserProvider } from '../contexts';
 
 export default {
-    title: 'Forms/Update User',
+    title: 'Pages/Update User',
     component: UpdateUserForm,
 };
 

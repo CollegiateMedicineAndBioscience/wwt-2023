@@ -2,8 +2,9 @@ import { rest } from 'msw';
 
 import { ResetPasswordForm } from '../controllers';
 import { ErrorProvider } from '../contexts';
+
 export default {
-    title: 'Forms/Reset Password',
+    title: 'Pages/Reset Password',
     component: ResetPasswordForm,
 };
 
