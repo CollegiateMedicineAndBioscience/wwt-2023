@@ -40,6 +40,7 @@ export default function Login({ form, handleSubmit, handleChange, error }) {
                     icon={LockIcon}
                     handleChange={handleChange}
                     value={form.password}
+                    type='password'
                     fullWidth
                     size='small'
                     sx={{ margin: '0.5vh 0' }}
