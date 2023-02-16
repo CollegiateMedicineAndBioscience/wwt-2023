@@ -15,7 +15,7 @@ export default function SearchbarController() {
         e.preventDefault();
 
         if (location.pathname === '/search') {
-            setSearchParams({ title: search }, { replace: true });
+            setSearchParams({ name: search }, { replace: true });
         } else {
             navigate({
                 pathname: '/search',

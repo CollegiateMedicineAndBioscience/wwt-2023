@@ -50,7 +50,7 @@ export default function NavbarLayoutController({ children }) {
                 <title>ClassroomCollective</title>
             </Helmet>
             <main>
-                <Box sx={{ height: '100vh', backgroundColor: 'midtone.main' }} overflow='scroll'>
+                <Box sx={{ height: '100vh', backgroundColor: 'midtone.main' }} overflow='auto'>
                     {md || sm
                         ? Navbar({
                               logout: logoutUser,
