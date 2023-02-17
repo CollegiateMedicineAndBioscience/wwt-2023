@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LoginForm } from '../components';
-import { useError } from '../contexts';
+import { useMessage } from '../contexts';
 import { login } from '../services/userServices';
 
 export default function LoginFormController() {
     const navigate = useNavigate();
-    const { error, setError } = useError();
+    const { error, setError } = useMessage();
 
     const [form, setForm] = useState({
         email: '',

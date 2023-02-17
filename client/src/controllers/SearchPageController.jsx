@@ -1,13 +1,16 @@
 import { useReducer, useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { SearchPage } from '../components';
-import { useError } from '../contexts';
+import { useMessage } from '../contexts';
 import { getAllOrgs } from '../services/orgServices';
+import { searchItems } from '../services/itemServices';
 
 export default function SearchPageController() {
-    const { error, setError } = useError();
+    const [searchParams] = useSearchParams();
+    const { error, setError, success } = useMessage();
 
-    const [searchParams, dispatchSearchParams] = useReducer(
+    const [filters, dispatchFilters] = useReducer(
         (state, action) => {
             switch (action.type) {
                 case 'availabilityChange':
@@ -58,34 +61,41 @@ export default function SearchPageController() {
 
     useEffect(() => {
         async function getData() {
-            const response = await getAllOrgs();
-            if (!response.success) {
-                setError(response.error);
+            const orgReq = await getAllOrgs();
+            if (!orgReq.success) {
+                setError(orgReq.error);
             } else {
-                setOrgs(response.organizations);
+                setOrgs(orgReq.organizations);
+            }
+
+            const itemReq = await searchItems({ ...filters, name: searchParams.name });
+            if (!itemReq.success) {
+                setError(itemReq.error);
+            } else {
+                setItems(itemReq.items);
             }
         }
 
         getData();
-    }, [setError]);
+    }, [setError, filters, searchParams]);
 
     function handleAvailabilityChange(e) {
-        dispatchSearchParams({ type: 'availabilityChange', value: e.target.value });
+        dispatchFilters({ type: 'availabilityChange', value: e.target.value });
     }
 
     function handleDateChange(value) {
-        dispatchSearchParams({ value });
+        dispatchFilters({ value });
     }
 
     function handleOrgChange(e) {
-        dispatchSearchParams({
+        dispatchFilters({
             type: 'locationChange',
             value: { check: e.target.checked, id: e.target.value },
         });
     }
 
     function applyFilters(e) {
-        dispatchSearchParams({
+        dispatchFilters({
             type: 'locationChange',
             value: { check: e.target.checked, id: e.target.value },
         });
@@ -96,11 +106,12 @@ export default function SearchPageController() {
             {...{
                 results: items,
                 orgs,
-                searchParams,
+                searchParams: { ...filters, name: searchParams.name },
                 handleAvailabilityChange,
                 handleDateChange,
                 handleOrgChange,
                 applyFilters,
+                success,
                 error,
             }}
         />

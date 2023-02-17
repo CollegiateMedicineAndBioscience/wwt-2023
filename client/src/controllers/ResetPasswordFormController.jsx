@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ResetPasswordForm } from '../components';
-import { useError } from '../contexts';
+import { useMessage } from '../contexts';
 import { resetPassword } from '../services/userServices';
 
 export default function RequestPasswordResetFormController() {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    const { error, setError } = useError();
+    const { error, setError } = useMessage();
 
     const [form, setForm] = useState({
         password: '',

@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RequestPasswordResetForm } from '../components';
-import { useError } from '../contexts';
+import { useMessage } from '../contexts';
 import { requestPasswordReset } from '../services/userServices';
 
 export default function RequestPasswordResetFormController() {
     const navigate = useNavigate();
-    const { error, setError } = useError();
+    const { error, setError } = useMessage();
 
     const [form, setForm] = useState({
         email: '',

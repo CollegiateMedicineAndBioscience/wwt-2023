@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 import { SearchPage } from '../controllers';
-import { ErrorProvider, UserProvider } from '../contexts';
+import { MessageProvider, UserContext } from '../contexts';
 
 export default {
     title: 'Pages/Search',
@@ -9,14 +9,22 @@ export default {
 };
 
 const Template = (args) => (
-    <ErrorProvider>
-        <UserProvider>
+    <MessageProvider>
+        <UserContext.Provider
+            value={{
+                ...args,
+                setLoggedIn: () => {},
+            }}
+        >
             <SearchPage {...args} />
-        </UserProvider>
-    </ErrorProvider>
+        </UserContext.Provider>
+    </MessageProvider>
 );
 
 export const Primary = Template.bind({});
+Primary.args = {
+    loggedIn: true,
+};
 Primary.parameters = {
     msw: {
         handlers: [
@@ -39,6 +47,72 @@ Primary.parameters = {
                         ],
                     })
                 );
+            }),
+            rest.get(`${process.env.REACT_APP_API_ROOT}/items`, (req, res, ctx) => {
+                return res(
+                    ctx.json({
+                        items: [
+                            {
+                                name: 'Triple Beam Balance',
+                                owner: {
+                                    name: 'May Rodgers',
+                                    organization: {
+                                        name: 'Central Visual and Performing Arts High School',
+                                        address: '3125 S Kingshighway Blvd, St. Louis, MO 63139',
+                                    },
+                                },
+                                ids: [
+                                    'a8d26c73-2bad-4cfa-a68c-763e5eee74c4',
+                                    '5b898594-4ab8-41c6-924a-c9abf6c775e0',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                    'a8d26c73-2bad-4cfa-a68c-763e5eee74c4',
+                                    '5b898594-4ab8-41c6-924a-c9abf6c775e0',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                    'a8d26c73-2bad-4cfa-a68c-763e5eee74c4',
+                                    '5b898594-4ab8-41c6-924a-c9abf6c775e0',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                    'a8d26c73-2bad-4cfa-a68c-763e5eee74c4',
+                                    '5b898594-4ab8-41c6-924a-c9abf6c775e0',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                    'a8d26c73-2bad-4cfa-a68c-763e5eee74c4',
+                                    '5b898594-4ab8-41c6-924a-c9abf6c775e0',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                    'a8d26c73-2bad-4cfa-a68c-763e5eee74c4',
+                                    '5b898594-4ab8-41c6-924a-c9abf6c775e0',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                    'a8d26c73-2bad-4cfa-a68c-763e5eee74c4',
+                                    '5b898594-4ab8-41c6-924a-c9abf6c775e0',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                    'a8d26c73-2bad-4cfa-a68c-763e5eee74c4',
+                                    '5b898594-4ab8-41c6-924a-c9abf6c775e0',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                    '1a5be34d-f064-472b-b7de-8c10f726287a',
+                                    'f9c1b3a2-4647-4f64-b13f-e0f740f509ac',
+                                    '7251e106-b0bd-485e-8f10-836d2df592ea',
+                                ],
+                            },
+                        ],
+                    })
+                );
+            }),
+            rest.post(`${process.env.REACT_APP_API_ROOT}/order`, (req, res, ctx) => {
+                return res();
             }),
         ],
     },

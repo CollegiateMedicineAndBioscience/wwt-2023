@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 import { UpdateUserForm } from '../controllers';
-import { ErrorProvider, UserProvider } from '../contexts';
+import { ContextProvider } from '../contexts';
 
 export default {
     title: 'Pages/Update User',
@@ -9,11 +9,9 @@ export default {
 };
 
 const Template = (args) => (
-    <ErrorProvider>
-        <UserProvider>
-            <UpdateUserForm {...args} />
-        </UserProvider>
-    </ErrorProvider>
+    <ContextProvider>
+        <UpdateUserForm {...args} />
+    </ContextProvider>
 );
 
 export const Primary = Template.bind({});

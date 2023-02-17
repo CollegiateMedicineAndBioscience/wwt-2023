@@ -1,9 +1,9 @@
-import { ErrorProvider, UserProvider } from '.';
+import { MessageProvider, UserProvider } from '.';
 
 export default function ContextProvider({ children }) {
     return (
-        <ErrorProvider>
+        <MessageProvider>
             <UserProvider>{children}</UserProvider>
-        </ErrorProvider>
+        </MessageProvider>
     );
 }

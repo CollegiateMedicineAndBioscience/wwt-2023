@@ -1,13 +1,13 @@
 import UserProvider, { useUser, UserContext } from './UserContext';
-import ErrorProvider, { useError, ErrorContext } from './ErrorContext';
+import MessageProvider, { useMessage, MessageContext } from './MessageContext';
 import ContextProvider from './ContextProvider';
 
 export {
     UserContext,
     UserProvider,
     useUser,
-    ErrorContext,
-    ErrorProvider,
-    useError,
+    MessageContext,
+    MessageProvider,
+    useMessage,
     ContextProvider,
 };

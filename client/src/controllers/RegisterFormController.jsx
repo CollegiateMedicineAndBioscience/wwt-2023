@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { RegisterForm } from '../components';
-import { useError } from '../contexts';
+import { useMessage } from '../contexts';
 import { register } from '../services/userServices';
 import { getAllOrgs } from '../services/orgServices';
 
 export default function RegisterFormController() {
     const navigate = useNavigate();
-    const { error, setError } = useError();
+    const { error, setError } = useMessage();
 
     const [form, setForm] = useState({
         firstName: '',

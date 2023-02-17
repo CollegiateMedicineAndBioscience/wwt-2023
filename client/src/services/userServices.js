@@ -16,12 +16,14 @@ async function login({ email, password, remember }) {
     }
 
     Cookies.set('token', response.token, { expires: 1 });
+
+    return response;
 }
 
 async function register(data) {
     const instance = createRequest('/user');
 
-    await instance.post('/', data);
+    return instance.post('/', data);
 }
 
 async function logout() {

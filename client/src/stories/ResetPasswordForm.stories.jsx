@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 import { ResetPasswordForm } from '../controllers';
-import { ErrorProvider } from '../contexts';
+import { MessageProvider } from '../contexts';
 
 export default {
     title: 'Pages/Reset Password',
@@ -9,9 +9,9 @@ export default {
 };
 
 const Template = (args) => (
-    <ErrorProvider>
+    <MessageProvider>
         <ResetPasswordForm {...args} />
-    </ErrorProvider>
+    </MessageProvider>
 );
 
 export const Primary = Template.bind({});

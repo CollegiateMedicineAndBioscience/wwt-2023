@@ -1,7 +1,7 @@
 import { rest } from 'msw';
 
 import { RegisterForm } from '../controllers';
-import { ErrorProvider } from '../contexts';
+import { MessageProvider } from '../contexts';
 
 export default {
     title: 'Pages/Register',
@@ -9,9 +9,9 @@ export default {
 };
 
 const Template = (args) => (
-    <ErrorProvider>
+    <MessageProvider>
         <RegisterForm {...args} />
-    </ErrorProvider>
+    </MessageProvider>
 );
 
 export const Primary = Template.bind({});

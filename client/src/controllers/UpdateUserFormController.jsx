@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UpdateUserForm } from '../components';
-import { useError, useUser } from '../contexts';
+import { useMessage, useUser } from '../contexts';
 import { getUser, updateUserDetails } from '../services/userServices';
 import { getAllOrgs } from '../services/orgServices';
 
 export default function UpdateUserFormController() {
     const navigate = useNavigate();
     const { loggedIn } = useUser();
-    const { error, setError } = useError();
+    const { error, setError } = useMessage();
 
     const [form, setForm] = useState({
         firstName: '',

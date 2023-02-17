@@ -9,6 +9,7 @@ import UpdateUserForm from './UpdateUserForm';
 import RequestPasswordResetForm from './RequestPasswordResetForm';
 import ResetPasswordForm from './ResetPasswordForm';
 import SearchPage from './SearchPage';
+import Item from './Item';
 
 export {
     FormField,
@@ -22,4 +23,5 @@ export {
     RequestPasswordResetForm,
     ResetPasswordForm,
     SearchPage,
+    Item,
 };

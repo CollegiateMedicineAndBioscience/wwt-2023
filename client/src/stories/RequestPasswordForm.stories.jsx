@@ -1,16 +1,16 @@
 import { rest } from 'msw';
 
 import { RequestPasswordResetForm } from '../controllers';
-import { ErrorProvider } from '../contexts';
+import { MessageProvider } from '../contexts';
 export default {
     title: 'Pages/Request Password Reset',
     component: RequestPasswordResetForm,
 };
 
 const Template = (args) => (
-    <ErrorProvider>
+    <MessageProvider>
         <RequestPasswordResetForm {...args} />
-    </ErrorProvider>
+    </MessageProvider>
 );
 
 export const Primary = Template.bind({});

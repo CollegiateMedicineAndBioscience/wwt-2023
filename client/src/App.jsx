@@ -6,13 +6,14 @@ import {
     UpdateUserForm,
     ResetPasswordForm,
     RequestPasswordResetForm,
+    SearchPage,
 } from './controllers';
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                {/* <Route path='' element={<MainPage />} /> */}
+                <Route path='' element={<SearchPage />} />
 
                 <Route path='/login' element={<LoginForm />} />
                 <Route path='/register' element={<RegisterForm />} />

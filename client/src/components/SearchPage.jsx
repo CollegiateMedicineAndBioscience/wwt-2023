@@ -11,7 +11,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
-import { NavbarLayout } from '../controllers';
+import { NavbarLayout, Item } from '../controllers';
 
 export default function SearchPage({
     results,
@@ -21,6 +21,7 @@ export default function SearchPage({
     handleOrgChange,
     handleDateChange,
     applyFilters,
+    success,
     error,
 }) {
     return (
@@ -98,8 +99,12 @@ export default function SearchPage({
                 </Grid>
                 <Grid item md={9}>
                     {error && <Alert severity='error'>{error}</Alert>}
-                    <Typography>{results.length} results</Typography>
-                    <Typography variant='h5'>Results for "{searchParams.name}"</Typography>
+                    {success && <Alert severity='success'>{success}</Alert>}
+                    <Typography>{results.length} result(s)</Typography>
+                    <Typography variant='h5'>Results for "Triple Beam Balance"</Typography>
+                    {results.map((item) => (
+                        <Item {...{ item, searchParams }} />
+                    ))}
                 </Grid>
             </Grid>
         </NavbarLayout>
