@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useMessage } from '../contexts';
+import { useMessage, useUser } from '../contexts';
 import { Item } from '../components';
 import { createOrder } from '../services/orderServices';
 
 export default function ItemController({ item, searchParams }) {
     const navigate = useNavigate();
     const { setError, setSuccess } = useMessage();
+    const { loggedIn } = useUser();
     const [quantity, setQuantity] = useState(0);
 
     function handleIncrease() {
@@ -42,14 +43,22 @@ export default function ItemController({ item, searchParams }) {
         if (!request.success) {
             setError(() => request.error);
         } else {
-            navigate('/search');
+            navigate('/');
             setSuccess('Your order was successfully created.');
         }
     }
 
     return (
         <Item
-            {...{ item, quantity, handleIncrease, handleDecrease, handleChange, handlePlaceOrder }}
+            {...{
+                item,
+                quantity,
+                loggedIn,
+                handleIncrease,
+                handleDecrease,
+                handleChange,
+                handlePlaceOrder,
+            }}
         />
     );
 }

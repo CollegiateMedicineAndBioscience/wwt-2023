@@ -18,7 +18,7 @@ export default function SearchbarController() {
             setSearchParams({ name: search }, { replace: true });
         } else {
             navigate({
-                pathname: '/',
+                pathname: '',
                 search: `?${createSearchParams({
                     title: search,
                 })}`,

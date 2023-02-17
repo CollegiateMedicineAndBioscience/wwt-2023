@@ -65,10 +65,8 @@ export default function SearchPage({
                             name='startDate'
                             className='form-field'
                             value={searchParams.startDate}
-                            renderInput={(params) => <TextField {...params} />}
-                            fullWidth
+                            renderInput={(params) => <TextField {...params} fullWidth />}
                             onChange={(value) => handleDateChange({ startDate: value })}
-                            sx={{ color: 'text.main' }}
                         />
                     </LocalizationProvider>
                     <Typography variant='h6'>
@@ -79,7 +77,7 @@ export default function SearchPage({
                             name='endDate'
                             className='form-field'
                             value={searchParams.endDate}
-                            renderInput={(params) => <TextField {...params} />}
+                            renderInput={(params) => <TextField {...params} fullWidth />}
                             onChange={(value) => handleDateChange({ endDate: value })}
                         />
                     </LocalizationProvider>
@@ -101,7 +99,7 @@ export default function SearchPage({
                     {error && <Alert severity='error'>{error}</Alert>}
                     {success && <Alert severity='success'>{success}</Alert>}
                     <Typography>{results.length} result(s)</Typography>
-                    <Typography variant='h5'>Results for "Triple Beam Balance"</Typography>
+                    <Typography variant='h5'>Results for "{searchParams.name}"</Typography>
                     {results.map((item) => (
                         <Item {...{ item, searchParams }} />
                     ))}

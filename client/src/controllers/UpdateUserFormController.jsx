@@ -43,7 +43,6 @@ export default function UpdateUserFormController() {
             if (!userReq.success) {
                 setError(userReq.error);
             } else {
-                console.log(userReq);
                 setForm((initial) => ({ ...initial, ...userReq.user }));
             }
         }

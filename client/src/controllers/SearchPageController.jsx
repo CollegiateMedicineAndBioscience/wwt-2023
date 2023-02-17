@@ -30,8 +30,6 @@ export default function SearchPageController() {
                               availableNow: true,
                           };
                 case 'locationChange':
-                    console.log(state.location);
-
                     if (action.value.check) {
                         return {
                             ...state,
@@ -106,7 +104,7 @@ export default function SearchPageController() {
             {...{
                 results: items,
                 orgs,
-                searchParams: { ...filters, name: searchParams.name },
+                searchParams: { ...filters, name: searchParams.get('name') },
                 handleAvailabilityChange,
                 handleDateChange,
                 handleOrgChange,

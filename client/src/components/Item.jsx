@@ -3,6 +3,7 @@ import { Paper, Typography, Grid, ButtonGroup, TextField, Button } from '@mui/ma
 export default function Item({
     item,
     quantity,
+    loggedIn,
     handleIncrease,
     handleDecrease,
     handleChange,
@@ -18,26 +19,28 @@ export default function Item({
                     <Typography>From: {item.owner.name}</Typography>
                     <Typography>Location: {item.owner.organization.address}</Typography>
                 </Grid>
-                <Grid item container md={2} justifyContent='flex-end' alignItems='flex-end'>
-                    <ButtonGroup row>
-                        <Button variant='contained' size='small' onClick={handleDecrease}>
-                            <b>-</b>
-                        </Button>
-                        <TextField
-                            variant='outlined'
-                            type='number'
-                            value={quantity}
-                            onChange={handleChange}
-                            sx={{ width: '6vw' }}
-                        />
-                        <Button variant='contained' size='small' onClick={handleIncrease}>
-                            <b>+</b>
-                        </Button>
-                        <Button variant='contained' size='small' onClick={handlePlaceOrder}>
-                            Order
-                        </Button>
-                    </ButtonGroup>
-                </Grid>
+                {loggedIn && (
+                    <Grid item container md={2} justifyContent='flex-end' alignItems='flex-end'>
+                        <ButtonGroup row>
+                            <Button variant='contained' size='small' onClick={handleDecrease}>
+                                <b>-</b>
+                            </Button>
+                            <TextField
+                                variant='outlined'
+                                type='number'
+                                value={quantity}
+                                onChange={handleChange}
+                                sx={{ width: '6vw' }}
+                            />
+                            <Button variant='contained' size='small' onClick={handleIncrease}>
+                                <b>+</b>
+                            </Button>
+                            <Button variant='contained' size='small' onClick={handlePlaceOrder}>
+                                Order
+                            </Button>
+                        </ButtonGroup>
+                    </Grid>
+                )}
             </Grid>
         </Paper>
     );

@@ -1,11 +1,8 @@
-import { Box, CssBaseline } from '@mui/material';
+import { Box } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { Helmet } from 'react-helmet';
 import { Outlet } from 'react-router-dom';
 
 import { MobileNavbar, Navbar } from '../components';
-import { lightTheme } from '../themes';
-
 import { useMediaQuery } from '@mui/material';
 import Cookies from 'js-cookie';
 import { useState } from 'react';
@@ -44,37 +41,29 @@ export default function NavbarLayoutController({ children }) {
     };
 
     return (
-        <ThemeProvider theme={lightTheme}>
-            <CssBaseline enableColorScheme />
-            <Helmet>
-                <title>ClassroomCollective</title>
-            </Helmet>
-            <main>
-                <Box sx={{ height: '100vh', backgroundColor: 'midtone.main' }} overflow='auto'>
-                    {md || sm
-                        ? Navbar({
-                              logout: logoutUser,
-                              loggedIn,
-                              userMenu: {
-                                  anchor: menuAnchor,
-                                  handleOpen: openUserMenu,
-                                  handleClose: closeUserMenu,
-                              },
-                              anchor: menuAnchor,
-                          })
-                        : MobileNavbar({
-                              logout: logoutUser,
-                              loggedIn,
-                              open,
-                              setOpen: toggleOpen,
-                          })}
+        <Box sx={{ height: '100vh', backgroundColor: 'midtone.main' }} overflow='auto'>
+            {md || sm
+                ? Navbar({
+                      logout: logoutUser,
+                      loggedIn,
+                      userMenu: {
+                          anchor: menuAnchor,
+                          handleOpen: openUserMenu,
+                          handleClose: closeUserMenu,
+                      },
+                      anchor: menuAnchor,
+                  })
+                : MobileNavbar({
+                      logout: logoutUser,
+                      loggedIn,
+                      open,
+                      setOpen: toggleOpen,
+                  })}
 
-                    <Box>
-                        <Outlet />
-                        {children}
-                    </Box>
-                </Box>
-            </main>
-        </ThemeProvider>
+            <Box>
+                <Outlet />
+                {children}
+            </Box>
+        </Box>
     );
 }
