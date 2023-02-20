@@ -12,23 +12,26 @@ async function DeleteItem(req, res) {
     if (!ids || ids.length === 0) {
         return res.status(400).send(errors.NotFound);
     }
-    // Making sure items exist
 
+    // Making sure items exist
     const itemCount = await Item.findAll({
         where: {
-            id: { [Op.in]: ids },
+            [Op.and]: [
+                {
+                    id: {
+                        [Op.in]: ids
+                    },
+                },
+                {
+                    owner: uid
+                },
+            ]
         }
     });
-    // Make sure all items are found
-    if (!(itemCount.length === ids.length)) {
-        return res.status(404).send(errors.NotFound);
-    }
 
-    // Make sure all items found belong to the owner passed
-    for (let i = 0; i < itemCount.length; i += 1) {
-        if (itemCount[i].owner !== uid) {
-            return res.status(403).send(errors.Forbidden);
-        }
+    // Make sure all items are found and are owned by person submitting deletion req
+    if (itemCount.length !== ids.length) {
+        return res.status(404).send(errors.NotFound);
     }
 
     //  deletion of records matching in array of ids
@@ -40,6 +43,7 @@ async function DeleteItem(req, res) {
                 }
             }
         });
+
         return res.sendStatus(200);
     } catch (e) {
         logger.error(e);
